@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<T3locallang>
+	<meta type='array'>
+		<type>module</type>
+		<description>Language labels for scheduler task belonging to extension 'tablecleaner'</description>
+	</meta>
+	<data type='array'>
+		<languageKey index='default' type='array'>
+			<label index='mlang_labels_tabdescr'>Overview of pages excluded from the cleaning process.</label>
+			<label index='mlang_tabs_tab'>Table Cleaner</label>
+			<label index='module.description'>Overview of pages excluded from the cleaning process. Here you will find a tree including all the pages that have 'exclude from cleaning' or 'exclude branch' from cleaning set in their page properties. Clicking on a 'page title' will bring up the page properties for that page.</label>
+			<label index='module.startingPoint'>Showing excluded page from starting point '%s' (uid: %s)</label>
+			<label index='module.subTitle'>Overview of excluded pages</label>
+			<label index='module.title'>Table Cleaner</label>
+			<label index='module.usage'>Usage</label>
+			<label index='module.usage.description'>Select a page in the page tree as starting point.</label>
+			<label index='module.usage.exclude'>Page is excluded from cleaning</label>
+			<label index='module.usage.excludeBranch'>Page and all child pages are excluded from cleaning</label>
+			<label index='tasks.deleted.title'>Table Cleaner: remove deleted entries</label>
+			<label index='tasks.deleted.description'>Removes deleted entries older than N days from tables.</label>
+			<label index='tasks.deleted.dayLimit'>Remove deleted entries older than given number of days</label>
+			<label index='tasks.deleted.additionalInformation'>Remove deleted entries older than %s days from tables: %s</label>
+			<label index='tasks.expired.title'>Table Cleaner: remove expired entries</label>
+			<label index='tasks.expired.description'>Removes entries older than N days from tables.</label>
+			<label index='tasks.expired.dayLimit'>Delete entries older than given number of days</label>
+			<label index='tasks.expired.additionalInformation'>Remove entries older than %s days from tables: %s</label>
+			<label index='tasks.general.additionalInformationExclude'> except from pages %s</label>
+			<label index='tasks.general.additionalInformationExcludeRecursive'> recursively</label>
+			<label index='tasks.general.tables'>Tables</label>
+			<label index='tasks.general.markAsDeleted'>Mark records as 'deleted' instead of removing them from the table</label>
+			<label index='tasks.general.noTables'>Please select one or more tables to clean</label>
+			<label index='tasks.general.invalidTables'>You somehow selected a table that is not available</label>
+			<label index='tasks.general.invalidNumberOfDays'>Please enter a valid number of days</label>
+			<label index='tasks.general.optimizeOption'>Perform 'OPTIMIZE TABLE' after clean up&lt;br/&gt;(WARNING: database may be unavailable shortly!)</label>
+			<label index='tasks.hidden.title'>Table Cleaner: remove hidden entries</label>
+			<label index='tasks.hidden.description'>Removes hidden entries older than N days from tables.</label>
+			<label index='tasks.hidden.dayLimit'>Remove hidden entries older than given number of days</label>
+			<label index='tasks.hidden.additionalInformation'>Remove hidden entries older than %s days from tables: %s</label>
+		</languageKey>
+		<languageKey index='nl' type='array'>
+			<label index='mlang_labels_tabdescr'>Overzicht van pagina's die uitgesloten zijn van opschoning.</label>
+			<label index='mlang_tabs_tab'>Tabel Opschoner</label>
+			<label index='module.description'>Overzicht van pagina's die uitgesloten zijn van opschoning. Hier vind je een overzicht van de pagina's en pagina takken die zijn uitgesloten van opschoning. Door te klikken op de pagina titel kun je de pagina eigenschappen van die pagina bewerken.</label>
+			<label index='module.startingPoint'>Pagina's vanaf startpunt '%s' (uid: %s)</label>
+			<label index='module.subTitle'>Overzicht van uitgesloten pagina's</label>
+			<label index='module.title'>Table Opschoner</label>
+			<label index='module.usage'>Gebruik</label>
+			<label index='module.usage.description'>Kies een pagina uit de paginaboom als startpunt.</label>
+			<label index='module.usage.exclude'>Pagina is uitgesloten van opschoning</label>
+			<label index='module.usage.excludeBranch'>Pagina inclusief alle onderliggende pagina's uitgesloten van opschoning</label>
+			<label index='tasks.deleted.title'>Tabel Opschonen: verwijderde rijen</label>
+			<label index='tasks.deleted.description'>Verwijdert verwijderde rijen ouder dan N dagen van tabellen.</label>
+			<label index='tasks.deleted.dayLimit'>Verwijder 'verwijderde' rijen ouder dan het opgegeven aantal dagen</label>
+			<label index='tasks.deleted.additionalInformation'>Verwijder 'verwijderde' rijen ouder dan %s dagen van tabellen: %s</label>
+			<label index='tasks.expired.title'>Tabel Opschonen: verouderde rijen</label>
+			<label index='tasks.expired.description'>Verwijdert rijen ouder dan N dagen van tabellen.</label>
+			<label index='tasks.expired.dayLimit'>Verwijder rijen ouder dan het opgegeven aantal dagen</label>
+			<label index='tasks.expired.additionalInformation'>Verwijder rijen ouder dan %s dagen van tabellen: %s</label>
+			<label index='tasks.general.additionalInformationExclude'> behalve van pagina's %s</label>
+			<label index='tasks.general.additionalInformationExcludeRecursive'> en onderliggende pagina's</label>
+			<label index='tasks.general.tables'>Tabellen</label>
+			<label index='tasks.general.markAsDeleted'>Zet de rijen op 'verwijderd' in plaats van ze daadwerkelijk te verwijderen</label>
+			<label index='tasks.general.noTables'>Selecteer een of meer tabellen om op te schonen</label>
+			<label index='tasks.general.invalidTables'>Je hebt niet beschikbare tabellen geselecteerd</label>
+			<label index='tasks.general.invalidNumberOfDays'>Geef een geldig aantal dagen op</label>
+			<label index='tasks.general.optimizeOption'>Voer 'OPTIMIZE TABLE' uit na opschonen&lt;br/&gt;(Waarschuwing: hierdoor is de database mogelijk even onbereikbaar!)</label>
+			<label index='tasks.hidden.title'>Tabel Opschonen: verborgen rijen</label>
+			<label index='tasks.hidden.description'>Verwijdert verborgen rijen ouder dan N dagen van tabellen.</label>
+			<label index='tasks.hidden.dayLimit'>Verwijder verborgen rijen ouder dan het opgegeven aantal dagen</label>
+			<label index='tasks.hidden.additionalInformation'>Verwijder verborgen rijen ouder dan %s dagen van tabellen: %s</label>
+		</languageKey>
+	</data>
+</T3locallang>
