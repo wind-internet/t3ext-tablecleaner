@@ -1,25 +1,21 @@
 <?php
-/*****************************************************************************
- *  Copyright notice
+namespace MichielRoos\Tablecleaner\Utility;
+
+/**
+ * ⓒ 2018 Michiel Roos <michiel@michielroos.com>
+ * All rights reserved
  *
- *  ⓒ 2013 Michiel Roos <michiel@maxserv.nl>
- *  All rights reserved
+ * This file is part of the TYPO3 CMS project.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is free
- *  software; you can redistribute it and/or modify it under the terms of the
- *  GNU General Public License as published by the Free Software Foundation;
- *  either version 2 of the License, or (at your option) any later version.
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
  *
- *  This script is distributed in the hope that it will be useful, but
- *  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- *  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- *  more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ****************************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Base utility methods
@@ -30,15 +26,17 @@
  * @license http://opensource.org/licenses/gpl-license.php
  *    GNU Public License, version 2
  */
-class Tx_Tablecleaner_Utility_Base {
+class Base
+{
 
 	/**
 	 * Get tables with deleted and tstamp fields
 	 *
 	 * @return array $tables  The tables
 	 */
-	public static function getTablesWithDeletedAndTstamp() {
-		$tables = array();
+	public static function getTablesWithDeletedAndTstamp()
+	{
+		$tables = [];
 		$resource = $GLOBALS['TYPO3_DB']->sql_query(
 			"SELECT TABLE_NAME
 			FROM INFORMATION_SCHEMA.COLUMNS
@@ -53,7 +51,7 @@ class Tx_Tablecleaner_Utility_Base {
 			AND TABLE_SCHEMA =  '" . TYPO3_db . "'"
 		);
 
-		if ($resource instanceof mysqli_result) {
+		if ($resource instanceof \mysqli_result) {
 			while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
 				$tables[] = $result['TABLE_NAME'];
 			};
@@ -66,8 +64,9 @@ class Tx_Tablecleaner_Utility_Base {
 	 *
 	 * @return array $tables  The tables
 	 */
-	public static function getTablesWithHiddenAndTstamp() {
-		$tables = array();
+	public static function getTablesWithHiddenAndTstamp()
+	{
+		$tables = [];
 		$resource = $GLOBALS['TYPO3_DB']->sql_query(
 			"SELECT TABLE_NAME
 			FROM INFORMATION_SCHEMA.COLUMNS
@@ -81,7 +80,7 @@ class Tx_Tablecleaner_Utility_Base {
 			AND COLUMN_NAME = 'tstamp'
 			AND TABLE_SCHEMA =  '" . TYPO3_db . "'"
 		);
-		if ($resource instanceof mysqli_result) {
+		if ($resource instanceof \mysqli_result) {
 			while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
 				$tables[] = $result['TABLE_NAME'];
 			};
@@ -94,8 +93,9 @@ class Tx_Tablecleaner_Utility_Base {
 	 *
 	 * @return array $tables  The tables
 	 */
-	public static function getTablesWithPid() {
-		$tables = array();
+	public static function getTablesWithPid()
+	{
+		$tables = [];
 		$resource = $GLOBALS['TYPO3_DB']->sql_query(
 			"SELECT TABLE_NAME
 			FROM INFORMATION_SCHEMA.COLUMNS
@@ -103,7 +103,7 @@ class Tx_Tablecleaner_Utility_Base {
 			AND COLUMN_NAME = 'pid'
 			AND TABLE_SCHEMA =  '" . TYPO3_db . "'"
 		);
-		if ($resource instanceof mysqli_result) {
+		if ($resource instanceof \mysqli_result) {
 			while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
 				$tables[] = $result['TABLE_NAME'];
 			};
@@ -118,9 +118,10 @@ class Tx_Tablecleaner_Utility_Base {
 	 *
 	 * @return array $pageIds
 	 */
-	public static function fetchChildPages($pageId) {
+	public static function fetchChildPages($pageId)
+	{
 		$res = $GLOBALS['TYPO3_DB']->sql_query('SELECT uid FROM pages WHERE pid = ' . $pageId);
-		$pageIds = array();
+		$pageIds = [];
 		$pageIds[] = $pageId;
 		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			$pageIds[] = $row['uid'];
@@ -137,8 +138,9 @@ class Tx_Tablecleaner_Utility_Base {
 	 *
 	 * @return array $pageIds
 	 */
-	public static function fetchExcludedPages() {
-		$pageIds = array();
+	public static function fetchExcludedPages()
+	{
+		$pageIds = [];
 
 		// First fetch the pages that have 'tx_tablecleaner_exclude' set
 		$res = $GLOBALS['TYPO3_DB']->sql_query('
@@ -175,10 +177,3 @@ class Tx_Tablecleaner_Utility_Base {
 	}
 
 }
-
-if (defined('TYPO3_MODE')
-	&& isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/tablecleaner/Classes/Utility/Base.php'])
-) {
-	require_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/tablecleaner/Classes/Utility/Base.php']);
-}
-?>

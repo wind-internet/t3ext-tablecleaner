@@ -1,53 +1,48 @@
 <?php
-/*****************************************************************************
- *  Copyright notice
- *
- *  ⓒ 2013 Michiel Roos <michiel@maxserv.nl>
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is free
- *  software; you can redistribute it and/or modify it under the terms of the
- *  GNU General Public License as published by the Free Software Foundation;
- *  either version 2 of the License, or (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful, but
- *  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- *  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- *  more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ****************************************************************************/
+namespace MichielRoos\Tablecleaner\Controller;
+
 /**
- * Created by PhpStorm.
- * Author: Michiel Roos <michiel@maxserv.nl>
- * Date: 15/11/13
- * Time: 10:29
- */
- 
-/**
- * InfoModule controller
+ * ⓒ 2018 Michiel Roos <michiel@michielroos.com>
+ * All rights reserved
  *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License,
- * version 3 or later
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * The TYPO3 project - inspiring people to share!
  */
-class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Controller_ActionController {
+
+use MichielRoos\Tablecleaner\Domain\Model\PageRepository;
+use MichielRoos\Tablecleaner\Utility\Base;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
+/**
+ * Class InfoModuleController
+ * @package MichielRoos\Tablecleaner
+ */
+class InfoModuleController extends ActionController
+{
 
 	/**
-	 * @var Tx_Tablecleaner_Domain_Repository_PageRepository
+	 * @var PageRepository
 	 */
 	protected $pageRepository;
 
 	/**
 	 * inject Page repository
 	 *
-	 * @param Tx_Tablecleaner_Domain_Repository_PageRepository $pageRepository
+	 * @param PageRepository $pageRepository
 	 * @return void
 	 */
-	public function injectPageRepository(Tx_Tablecleaner_Domain_Repository_PageRepository $pageRepository) {
+	public function injectPageRepository(PageRepository $pageRepository)
+	{
 		$this->pageRepository = $pageRepository;
 	}
 
@@ -56,21 +51,22 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 	 *
 	 * @return void
 	 */
-	public function indexAction() {
+	public function indexAction()
+	{
 
-		$uid = abs(t3lib_div::_GP('id'));
+		$uid = abs(GeneralUtility::_GP('id'));
 		$values['startingPage'] = $this->pageRepository->findOneByUid($uid);
 
-			// Initialize tree object:
-			/** @var t3lib_browsetree $tree */
-		$tree = t3lib_div::makeInstance('t3lib_browsetree');
-			// Also store tree prefix markup:
-		$tree->expandFirst = TRUE;
-		$tree->addField('tx_tablecleaner_exclude', TRUE);
-		$tree->addField('tx_tablecleaner_exclude_branch', TRUE);
+		// Initialize tree object:
+		/** @var t3lib_browsetree $tree */
+		$tree = GeneralUtility::makeInstance('t3lib_browsetree');
+		// Also store tree prefix markup:
+		$tree->expandFirst = true;
+		$tree->addField('tx_tablecleaner_exclude', true);
+		$tree->addField('tx_tablecleaner_exclude_branch', true);
 		$tree->makeHTML = 2;
 		$tree->table = 'pages';
-			// Set starting page id of the tree (overrides webmounts):
+		// Set starting page id of the tree (overrides webmounts):
 		$tree->setTreeName('tablecleaner_' . $uid);
 		$this->MOUNTS = $GLOBALS['WEBMOUNTS'];
 
@@ -79,18 +75,18 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 		$tree->setDataFromArray($treeData);
 
 		$tree->getTree($uid);
-		$tree->ext_IconMode = TRUE;
+		$tree->ext_IconMode = true;
 		$tree->ext_showPageId = $GLOBALS['BE_USER']->getTSConfigVal('options.pageTree.showPageIdWithTitle');
-		$tree->showDefaultTitleAttribute = TRUE;
+		$tree->showDefaultTitleAttribute = true;
 		/**
 		 * Hmmm . . . need php_http module for this, can't count on that :-(
-		parse_str($parsedUrl['query'], $urlQuery);
-		unset($urlQuery['PM']);
-		$parsedUrl = http_build_query($urlQuery);
-		$tree->thisScript = http_build_url($parsedUrl);
-		*/
-			// Remove the PM parameter to avoid adding multiple of those to the url
-		$tree->thisScript = preg_replace('/&PM=[^#$]*/', '', t3lib_div::getIndpEnv('REQUEST_URI'));
+		 * parse_str($parsedUrl['query'], $urlQuery);
+		 * unset($urlQuery['PM']);
+		 * $parsedUrl = http_build_query($urlQuery);
+		 * $tree->thisScript = http_build_url($parsedUrl);
+		 */
+		// Remove the PM parameter to avoid adding multiple of those to the url
+		$tree->thisScript = preg_replace('/&PM=[^#$]*/', '', GeneralUtility::getIndpEnv('REQUEST_URI'));
 
 		$tree->getBrowsableTree();
 
@@ -107,9 +103,10 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 	 * @param string $subLevelId
 	 * @return array
 	 */
-	protected function getTreeData($uid, $subLevelId) {
+	protected function getTreeData($uid, $subLevelId)
+	{
 
-			// Filter the results by preference and access
+		// Filter the results by preference and access
 		$clauseExludePidList = '';
 		if ($pidList = $GLOBALS['BE_USER']->getTSConfigVal('options.hideRecords.pages')) {
 			if ($pidList = $GLOBALS['TYPO3_DB']->cleanIntList($pidList)) {
@@ -156,12 +153,12 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 		$allExcludedPages = array_merge($excludePages, $excludeBranchPages);
 		$allExcludedPages = array_unique($allExcludedPages);
 
-		$allUids = array();
+		$allUids = [];
 		foreach ($allExcludedPages as $pageId) {
-				// Don't fetch the rootline if the pageId is already in the list
+			// Don't fetch the rootline if the pageId is already in the list
 			if (!in_array($pageId, $allUids)) {
-					// Get the rootline up to the starting uid
-				$rootLine = t3lib_BEfunc::BEgetRootLine($pageId, ' AND NOT uid = ' . $uid . $clause);
+				// Get the rootline up to the starting uid
+				$rootLine = BackendUtility::BEgetRootLine($pageId, ' AND NOT uid = ' . $uid . $clause);
 				foreach ($rootLine as $record) {
 					$allUids[] = $record['uid'];
 				}
@@ -177,12 +174,12 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 		 * 4). Fetch all the children of the pages that have exclude_branch set.
 		 */
 		foreach ($excludeBranchPages as $pageId) {
-			$allUids = array_merge($allUids, Tx_Tablecleaner_Utility_Base::fetchChildPages($pageId));
+			$allUids = array_merge($allUids, Base::fetchChildPages($pageId));
 		}
 		$allUids = array_unique($allUids);
 
 		$foundPages = $this->pageRepository->findByUids($allUids);
-		$allPages = array();
+		$allPages = [];
 		foreach ($foundPages as $page) {
 			$allPages[$page['uid']] = $page;
 		}
@@ -203,9 +200,10 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 	 *
 	 * @return array
 	 */
-	protected function reassembleTree($records, $parentId, $subLevelId) {
-		$branches = array();
-			// Check if there are any children of the $parentId
+	protected function reassembleTree($records, $parentId, $subLevelId)
+	{
+		$branches = [];
+		// Check if there are any children of the $parentId
 		foreach ($records as $record) {
 			if ($record['pid'] == $parentId) {
 				$children = $this->reassembleTree($records, $record['uid'], $subLevelId);
@@ -222,5 +220,3 @@ class Tx_Tablecleaner_Controller_InfoModuleController extends Tx_Extbase_MVC_Con
 	}
 
 }
-
-?>

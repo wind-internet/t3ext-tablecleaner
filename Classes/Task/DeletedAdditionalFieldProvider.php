@@ -1,43 +1,40 @@
 <?php
-/*****************************************************************************
- *  Copyright notice
- *
- *  ⓒ 2014 Michiel Roos <michiel@maxserv.nl>
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is free
- *  software; you can redistribute it and/or modify it under the terms of the
- *  GNU General Public License as published by the Free Software Foundation;
- *  either version 2 of the License, or (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful, but
- *  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- *  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- *  more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ****************************************************************************/
+namespace MichielRoos\Tablecleaner\Task;
 
 /**
- * Additional field provider for the Deleted scheduler task
+ * ⓒ 2018 Michiel Roos <michiel@michielroos.com>
+ * All rights reserved
  *
- * @package TYPO3
- * @subpackage tablecleaner
- * @version $Id:$
- * @license http://opensource.org/licenses/gpl-license.php
- *    GNU Public License, version 2
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * The TYPO3 project - inspiring people to share!
  */
-class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_scheduler_AdditionalFieldProvider {
+
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+/**
+ * Class DeletedAdditionalFieldProvider
+ * @package MichielRoos\Tablecleaner\Task
+ */
+class DeletedAdditionalFieldProvider implements AdditionalFieldProviderInterface
+{
 
 	/**
 	 * Render additional information fields within the scheduler backend.
 	 *
 	 * @param  array $taskInfo
-	 * @param  tx_tablecleaner_tasks_Deleted $task : task object
-	 * @param  tx_scheduler_Module $schedulerModule : reference to the calling
+	 * @param  Deleted $task : task object
+	 * @param  SchedulerModuleController $schedulerModule : reference to the calling
 	 *    object (BE module of the Scheduler)
 	 *
 	 * @internal  param array $taksInfo : array information of task to return
@@ -49,15 +46,16 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 	public function getAdditionalFields(
 		array &$taskInfo,
 		$task,
-		tx_scheduler_Module $schedulerModule) {
-		$additionalFields = array();
+		SchedulerModuleController $schedulerModule
+	) {
+		$additionalFields = [];
 
 		// tables
 		if (empty($taskInfo['deletedTables'])) {
-			$taskInfo['deletedTables'] = array();
+			$taskInfo['deletedTables'] = [];
 			if ($schedulerModule->CMD === 'add') {
 				// In case of new task, set some defaults
-				$tablesWithDeleted = Tx_Tablecleaner_Utility_Base::getTablesWithDeletedAndTstamp();
+				$tablesWithDeleted = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithDeletedAndTstamp();
 				if (in_array('sys_log', $tablesWithDeleted)) {
 					$taskInfo['deletedTables'][] = 'sys_log';
 				}
@@ -80,7 +78,7 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldHtml,
-			'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xml:tasks.general.tables',
+			'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.tables',
 			'cshKey' => 'tablecleaner',
 			'cshLabel' => $fieldId,
 		);
@@ -99,7 +97,7 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 			$fieldId . '" value="' . htmlspecialchars($taskInfo['deletedDayLimit']) . '"/>';
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldCode,
-			'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xml:tasks.deleted.dayLimit',
+			'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.dayLimit',
 			'cshKey' => 'tablecleaner',
 			'cshLabel' => $fieldId,
 		);
@@ -117,7 +115,7 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 			$fieldId . '" value="checked" ' . $taskInfo['optimizeOption'] . '/>';
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldCode,
-			'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xml:tasks.general.optimizeOption',
+			'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.optimizeOption',
 			'cshKey' => 'tablecleaner',
 			'cshLabel' => $fieldId,
 		);
@@ -132,10 +130,11 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 	 *
 	 * @return string HTML of selectbox options
 	 */
-	protected function getTableOptions(array $selectedTables) {
-		$options = array();
+	protected function getTableOptions(array $selectedTables)
+	{
+		$options = [];
 
-		$availableTables = Tx_Tablecleaner_Utility_Base::getTablesWithDeletedAndTstamp();
+		$availableTables = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithDeletedAndTstamp();
 		foreach ($availableTables as $tableName) {
 			if (in_array($tableName, $selectedTables)) {
 				$selected = ' selected="selected"';
@@ -157,45 +156,46 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 	 *
 	 * @param array $submittedData : reference to the array containing the data
 	 *    submitted by the user
-	 * @param \tx_scheduler_Module $schedulerModule :
+	 * @param SchedulerModuleController :
 	 *    reference to the calling object (BE module of the Scheduler)
 	 *
 	 * @return boolean True if validation was ok (or selected class is not
 	 *    relevant), FALSE otherwise
 	 */
-	public function validateAdditionalFields(array &$submittedData, tx_scheduler_Module $schedulerModule) {
-		$isValid = TRUE;
+	public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
+	{
+		$isValid = true;
 
 		if (is_array($submittedData['deletedTables'])) {
-			$tables = Tx_Tablecleaner_Utility_Base::getTablesWithDeletedAndTstamp();
+			$tables = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithDeletedAndTstamp();
 			foreach ($submittedData['deletedTables'] as $table) {
 				if (!in_array($table, $tables)) {
-					$isValid = FALSE;
+					$isValid = false;
 					$schedulerModule->addMessage(
 						$GLOBALS['LANG']->sL(
-							'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xml:tasks.general.invalidTables'
+							'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidTables'
 						),
-						t3lib_FlashMessage::ERROR
+						FlashMessage::ERROR
 					);
 				}
 			}
 		} else {
-			$isValid = FALSE;
+			$isValid = false;
 			$schedulerModule->addMessage(
 				$GLOBALS['LANG']->sL(
-					'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xml:tasks.general.noTables'
+					'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.noTables'
 				),
-				t3lib_FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 		}
 
 		if ($submittedData['deletedDayLimit'] <= 0) {
-			$isValid = FALSE;
+			$isValid = false;
 			$schedulerModule->addMessage(
 				$GLOBALS['LANG']->sL(
-					'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xml:tasks.general.invalidNumberOfDays'
+					'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidNumberOfDays'
 				),
-				t3lib_FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 		}
 
@@ -207,22 +207,15 @@ class tx_tablecleaner_tasks_DeletedAdditionalFieldProvider implements tx_schedul
 	 * if the task class matches.
 	 *
 	 * @param array $submittedData : array containing the data submitted by the user
-	 * @param tx_scheduler_Task $task : reference to the current task object
+	 * @param AbstractTask $task : reference to the current task object
 	 *
 	 * @return   void
 	 */
-	public function saveAdditionalFields(array $submittedData, tx_scheduler_Task $task) {
+	public function saveAdditionalFields(array $submittedData, AbstractTask $task)
+	{
 		/** @var $task tx_tablecleaner_tasks_Base */
 		$task->setDayLimit(intval($submittedData['deletedDayLimit']));
 		$task->setOptimizeOption($submittedData['optimizeOption'] === 'checked');
 		$task->setTables($submittedData['deletedTables']);
 	}
 }
-
-if (defined('TYPO3_MODE') &&
-	isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/tablecleaner/Classes/Tasks/DeletedAdditionalFieldProvider.php'])
-) {
-	require_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/tablecleaner/Classes/Tasks/DeletedAdditionalFieldProvider.php']);
-}
-
-?>

@@ -1,4 +1,6 @@
 <?php
+namespace MichielRoos\Tablecleaner\Domain\Model;
+
 /*****************************************************************************
  *  Copyright notice
  *
@@ -21,15 +23,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ****************************************************************************/
 
-/**
- * A page
- *
- * @author   Michiel Roos <michiel@maxserv.nl>
- * @package TYPO3
- * @subpackage tablecleaner
- */
-class Tx_Tablecleaner_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEntity {
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
+/**
+ * Class Page
+ * @package MichielRoos\Tablecleaner\Domain\Model
+ */
+class Page extends AbstractEntity
+{
 	/**
 	 * @var boolean
 	 */
@@ -41,31 +42,32 @@ class Tx_Tablecleaner_Domain_Model_Page extends Tx_Extbase_DomainObject_Abstract
 	protected $excludeBranch;
 
 	/**
-	 * @var string
-	 */
+	 *  * @var string
+	 *  */
 	protected $title;
 
 	/**
 	 * @return boolean
 	 */
-	public function getExclude() {
+	public function getExclude()
+	{
 		return $this->exclude;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getExcludeBranch() {
+	public function getExcludeBranch()
+	{
 		return $this->excludeBranch;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getTitle() {
+	public function getTitle()
+	{
 		return $this->title;
 	}
 
 }
-
-?>

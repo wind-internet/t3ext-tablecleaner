@@ -1,4 +1,6 @@
 <?php
+namespace MichielRoos\Tablecleaner\Task;
+
 /*****************************************************************************
  *  Copyright notice
  *
@@ -21,16 +23,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ****************************************************************************/
 
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
 /**
- * Base scheduler task
- *
- * @package TYPO3
- * @subpackage tablecleaner
- * @version $Id:$
- * @license http://opensource.org/licenses/gpl-license.php
- *    GNU Public License, version 2
+ * Class Base
+ * @package MichielRoos\Tablecleaner\Task
  */
-class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
+class Base extends AbstractTask
+{
 
 	/**
 	 * Array of tables
@@ -65,7 +65,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return array of tables
 	 */
-	public function getTables() {
+	public function getTables()
+	{
 		return $this->tables;
 	}
 
@@ -76,7 +77,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return void
 	 */
-	public function setTables($tables) {
+	public function setTables($tables)
+	{
 		$this->tables = $tables;
 	}
 
@@ -85,7 +87,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return integer dayLimit
 	 */
-	public function getDayLimit() {
+	public function getDayLimit()
+	{
 		return $this->dayLimit;
 	}
 
@@ -96,7 +99,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return void
 	 */
-	public function setDayLimit($dayLimit) {
+	public function setDayLimit($dayLimit)
+	{
 		$this->dayLimit = $dayLimit;
 	}
 
@@ -105,7 +109,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return integer optimizeOption
 	 */
-	public function getOptimizeOption() {
+	public function getOptimizeOption()
+	{
 		return $this->optimizeOption;
 	}
 
@@ -116,7 +121,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return void
 	 */
-	public function setOptimizeOption($optimizeOption) {
+	public function setOptimizeOption($optimizeOption)
+	{
 		$this->optimizeOption = $optimizeOption;
 	}
 
@@ -125,7 +131,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return $this to allow for chaining
 	 */
-	public function setMarkAsDeleted($markAsDeleted) {
+	public function setMarkAsDeleted($markAsDeleted)
+	{
 		$this->markAsDeleted = $markAsDeleted;
 		return $this;
 	}
@@ -133,7 +140,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	/**
 	 * @return boolean
 	 */
-	public function getMarkAsDeleted() {
+	public function getMarkAsDeleted()
+	{
 		return $this->markAsDeleted;
 	}
 
@@ -144,9 +152,10 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return string
 	 */
-	public function getWhereClause($table) {
-		$excludePages = Tx_Tablecleaner_Utility_Base::fetchExcludedPages();
-		$tablesWithPid = Tx_Tablecleaner_Utility_Base::getTablesWithPid();
+	public function getWhereClause($table)
+	{
+		$excludePages = \MichielRoos\Tablecleaner\Utility\Base::fetchExcludedPages();
+		$tablesWithPid = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithPid();
 		$where = ' tstamp < ' . strtotime('-' . (int)$this->dayLimit . 'days');
 		if (!empty($excludePages) && in_array($table, $tablesWithPid)) {
 			if ($table === 'pages') {
@@ -157,6 +166,7 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 		}
 		return $where;
 	}
+
 	/**
 	 * This is the main method that is called when a task is executed
 	 * It MUST be implemented by all classes inheriting from this one
@@ -166,15 +176,8 @@ class tx_tablecleaner_tasks_Base extends tx_scheduler_Task {
 	 *
 	 * @return boolean   Returns true on successful execution, false on error
 	 */
-	public function execute() {
+	public function execute()
+	{
 		// TODO: Implement execute() method.
 	}
 }
-
-if (defined('TYPO3_MODE')
-	&& isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/tablecleaner/Classes/Tasks/Base.php'])
-) {
-	require_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/tablecleaner/Classes/Tasks/Base.php']);
-}
-
-?>
