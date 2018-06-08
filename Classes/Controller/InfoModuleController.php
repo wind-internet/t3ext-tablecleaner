@@ -17,11 +17,12 @@ namespace MichielRoos\Tablecleaner\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use MichielRoos\Tablecleaner\Domain\Model\PageRepository;
+use MichielRoos\Tablecleaner\Domain\Repository\PageRepository;
 use MichielRoos\Tablecleaner\Utility\Base;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
 /**
  * Class InfoModuleController
@@ -53,7 +54,6 @@ class InfoModuleController extends ActionController
 	 */
 	public function indexAction()
 	{
-
 		$uid = abs(GeneralUtility::_GP('id'));
 		$values['startingPage'] = $this->pageRepository->findOneByUid($uid);
 
@@ -178,7 +178,11 @@ class InfoModuleController extends ActionController
 		}
 		$allUids = array_unique($allUids);
 
-		$foundPages = $this->pageRepository->findByUids($allUids);
+		try {
+			$foundPages = $this->pageRepository->findByUids($allUids);
+		} catch (InvalidQueryException $exception) {
+			$foundPages = [];
+		}
 		$allPages = [];
 		foreach ($foundPages as $page) {
 			$allPages[$page['uid']] = $page;

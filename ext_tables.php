@@ -50,11 +50,11 @@ if (TYPO3_MODE === 'BE') {
 	 */
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 	// Extension name
-		'tablecleaner',
+		'MichielRoos.tablecleaner',
 		// Place in section
 		'web',
 		// Module name
-		'Tx_Tablecleaner_InfoModule',
+		'InfoModule',
 		// Position
 		'after:info',
 		// An array holding the controller-action-combinations that are accessible

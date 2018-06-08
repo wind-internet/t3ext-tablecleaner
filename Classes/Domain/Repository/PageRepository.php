@@ -1,5 +1,5 @@
 <?php
-namespace MichielRoos\Tablecleaner\Domain\Model;
+namespace MichielRoos\Tablecleaner\Domain\Repository;
 
 /**
  * ⓒ 2018 Michiel Roos <michiel@michielroos.com>
@@ -23,7 +23,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Class PageRepository
- * @package MichielRoos\Tablecleaner\Domain\Model
+ * @package MichielRoos\Tablecleaner\Domain\Repository
  */
 class PageRepository extends Repository
 {
