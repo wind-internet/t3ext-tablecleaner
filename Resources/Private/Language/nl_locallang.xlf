@@ -5,99 +5,99 @@
         <header/>
         <body>
             <trans-unit id="mlang_labels_tabdescr">
-                <source>Overview of pages excluded from the cleaning process.</source>
+                <target>Overzicht van pagina's die uitgesloten zijn van opschoning.</target>
             </trans-unit>
             <trans-unit id="mlang_tabs_tab">
-                <source>Table Cleaner</source>
+                <target>Tabel Opschoner</target>
             </trans-unit>
             <trans-unit id="module.description">
-                <source>Overview of pages excluded from the cleaning process. Here you will find a tree including all
-                    the pages that have 'exclude from cleaning' or 'exclude branch' from cleaning set in their page
-                    properties. Clicking on a 'page title' will bring up the page properties for that page.
-                </source>
+                <target>Overzicht van pagina's die uitgesloten zijn van opschoning. Hier vind je een overzicht van de
+                    pagina's en pagina takken die zijn uitgesloten van opschoning. Door te klikken op de pagina titel
+                    kun je de pagina eigenschappen van die pagina bewerken.
+                </target>
             </trans-unit>
             <trans-unit id="module.startingPoint">
-                <source>Showing excluded page from starting point '%s' (uid: %s)</source>
+                <target>Pagina's vanaf startpunt '%s' (uid: %s)</target>
             </trans-unit>
             <trans-unit id="module.subTitle">
-                <source>Overview of excluded pages</source>
+                <target>Overzicht van uitgesloten pagina's</target>
             </trans-unit>
             <trans-unit id="module.title">
-                <source>Table Cleaner</source>
+                <target>Table Opschoner</target>
             </trans-unit>
             <trans-unit id="module.usage">
-                <source>Usage</source>
+                <target>Gebruik</target>
             </trans-unit>
             <trans-unit id="module.usage.description">
-                <source>Select a page in the page tree as starting point.</source>
+                <target>Kies een pagina uit de paginaboom als startpunt.</target>
             </trans-unit>
             <trans-unit id="module.usage.exclude">
-                <source>Page is excluded from cleaning</source>
+                <target>Pagina is uitgesloten van opschoning</target>
             </trans-unit>
             <trans-unit id="module.usage.excludeBranch">
-                <source>Page and all child pages are excluded from cleaning</source>
+                <target>Pagina inclusief alle onderliggende pagina's uitgesloten van opschoning</target>
             </trans-unit>
             <trans-unit id="tasks.deleted.title">
-                <source>Table Cleaner: remove deleted entries</source>
+                <target>Tabel Opschonen: verwijderde rijen</target>
             </trans-unit>
             <trans-unit id="tasks.deleted.description">
-                <source>Removes deleted entries older than N days from tables.</source>
+                <target>Verwijdert verwijderde rijen ouder dan N dagen van tabellen.</target>
             </trans-unit>
             <trans-unit id="tasks.deleted.dayLimit">
-                <source>Remove deleted entries older than given number of days</source>
+                <target>Verwijder 'verwijderde' rijen ouder dan het opgegeven aantal dagen</target>
             </trans-unit>
             <trans-unit id="tasks.deleted.additionalInformation">
-                <source>Remove deleted entries older than %s days from tables: %s</source>
+                <target>Verwijder 'verwijderde' rijen ouder dan %s dagen van tabellen: %s</target>
             </trans-unit>
             <trans-unit id="tasks.expired.title">
-                <source>Table Cleaner: remove expired entries</source>
+                <target>Tabel Opschonen: verouderde rijen</target>
             </trans-unit>
             <trans-unit id="tasks.expired.description">
-                <source>Removes entries older than N days from tables.</source>
+                <target>Verwijdert rijen ouder dan N dagen van tabellen.</target>
             </trans-unit>
             <trans-unit id="tasks.expired.dayLimit">
-                <source>Delete entries older than given number of days</source>
+                <target>Verwijder rijen ouder dan het opgegeven aantal dagen</target>
             </trans-unit>
             <trans-unit id="tasks.expired.additionalInformation">
-                <source>Remove entries older than %s days from tables: %s</source>
+                <target>Verwijder rijen ouder dan %s dagen van tabellen: %s</target>
             </trans-unit>
             <trans-unit id="tasks.general.additionalInformationExclude">
-                <source>except from pages %s</source>
+                <target>behalve van pagina's %s</target>
             </trans-unit>
             <trans-unit id="tasks.general.additionalInformationExcludeRecursive">
-                <source>recursively</source>
+                <target>en onderliggende pagina's</target>
             </trans-unit>
             <trans-unit id="tasks.general.tables">
-                <source>Tables</source>
+                <target>Tabellen</target>
             </trans-unit>
             <trans-unit id="tasks.general.markAsDeleted">
-                <source>Mark records as 'deleted' instead of removing them from the table</source>
+                <target>Zet de rijen op 'verwijderd' in plaats van ze daadwerkelijk te verwijderen</target>
             </trans-unit>
             <trans-unit id="tasks.general.noTables">
-                <source>Please select one or more tables to clean</source>
+                <target>Selecteer een of meer tabellen om op te schonen</target>
             </trans-unit>
             <trans-unit id="tasks.general.invalidTables">
-                <source>You somehow selected a table that is not available</source>
+                <target>Je hebt niet beschikbare tabellen geselecteerd</target>
             </trans-unit>
             <trans-unit id="tasks.general.invalidNumberOfDays">
-                <source>Please enter a valid number of days</source>
+                <target>Geef een geldig aantal dagen op</target>
             </trans-unit>
             <trans-unit id="tasks.general.optimizeOption">
-                <source>Perform 'OPTIMIZE TABLE' after clean up&lt;br/&gt;(WARNING: database may be unavailable
-                    shortly!)
-                </source>
+                <target>Voer 'OPTIMIZE TABLE' uit na opschonen&lt;br/&gt;(Waarschuwing: hierdoor is de database mogelijk
+                    even onbereikbaar!)
+                </target>
             </trans-unit>
             <trans-unit id="tasks.hidden.title">
-                <source>Table Cleaner: remove hidden entries</source>
+                <target>Tabel Opschonen: verborgen rijen</target>
             </trans-unit>
             <trans-unit id="tasks.hidden.description">
-                <source>Removes hidden entries older than N days from tables.</source>
+                <target>Verwijdert verborgen rijen ouder dan N dagen van tabellen.</target>
             </trans-unit>
             <trans-unit id="tasks.hidden.dayLimit">
-                <source>Remove hidden entries older than given number of days</source>
+                <target>Verwijder verborgen rijen ouder dan het opgegeven aantal dagen</target>
             </trans-unit>
             <trans-unit id="tasks.hidden.additionalInformation">
-                <source>Remove hidden entries older than %s days from tables: %s</source>
+                <target>Verwijder verborgen rijen ouder dan %s dagen van tabellen: %s</target>
             </trans-unit>
         </body>
     </file>

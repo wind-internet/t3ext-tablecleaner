@@ -5,53 +5,49 @@
         <header/>
         <body>
             <trans-unit id="task_deletedTables.alttitle">
-                <source>Tables</source>
+                <target>Tabellen</target>
             </trans-unit>
             <trans-unit id="task_deletedTables.description">
-                <source>Select the tables from which you want to remove the deleted entries.</source>
+                <target>Selecteer de tabellen waaruit de verwijderde rijden moeten worden verwijderd.</target>
             </trans-unit>
             <trans-unit id="task_deletedDayLimit.alttitle">
-                <source>Retention time</source>
+                <target>Retentie tijd</target>
             </trans-unit>
             <trans-unit id="task_deletedDayLimit.description">
-                <source>Choose the number of days after which the 'deleted' entries should be removed from the chosen
-                    tables.
-                </source>
+                <target>Het aantal dagen waarna de verwijderde rijen uit de tabel worden verwijderd.</target>
             </trans-unit>
             <trans-unit id="task_hiddenTables.alttitle">
-                <source>Tables</source>
+                <target>Tabellen</target>
             </trans-unit>
             <trans-unit id="task_hiddenTables.description">
-                <source>Select the tables from which you want to remove the hidden entries.</source>
+                <target>Selecteer de tabellen waaruit de verborgen rijden moeten worden verwijderd.</target>
             </trans-unit>
             <trans-unit id="task_dayLimit.alttitle">
-                <source>Retention time</source>
+                <target>Retentie tijd</target>
             </trans-unit>
             <trans-unit id="task_dayLimit.description">
-                <source>Choose the number of days after which the 'hidden' entries should be removed from the chosen
-                    tables.
-                </source>
+                <target>Het aantal dagen waarna de verborgen rijen uit de tabel worden verwijderd.</target>
             </trans-unit>
             <trans-unit id="task_expiredTables.alttitle">
-                <source>Tables</source>
+                <target>Tabellen</target>
             </trans-unit>
             <trans-unit id="task_expiredTables.description">
-                <source>Select the tables from which you want to remove the expired entries.</source>
+                <target>Selecteer de tabellen waaruit de rijden moeten worden verwijderd.</target>
             </trans-unit>
             <trans-unit id="task_dayLimit.alttitle">
-                <source>Retention time</source>
+                <target>Retentie tijd</target>
             </trans-unit>
             <trans-unit id="task_dayLimit.description">
-                <source>Choose the number of days after which the entries should be removed from the chosen tables.
-                </source>
+                <target>Het aantal dagen waarna de rijen uit de tabel worden verwijderd.</target>
             </trans-unit>
             <trans-unit id="task_markAsDeleted.alttitle">
-                <source>Mark as deleted</source>
+                <target>Zet op verwijderd</target>
             </trans-unit>
             <trans-unit id="task_markAsDeleted.description">
-                <source>Instead of removing the records from the table, mark them as deleted. The timestamp of these
-                    records will be updated. The records may later be cleaned up by the 'deleted' tablecleaner task.
-                </source>
+                <target>Markeer de rijen als 'verwijderd' in plaats van ze daadwerkelijk uit de tabel te verwijderen. De
+                    timestamp van deze rijen zal worden aangepast. De 'verwijderde rijden' tablecleaner opschoontaak kan
+                    ze vervolgens daadwerkelijk verwijderen.
+                </target>
             </trans-unit>
         </body>
     </file>

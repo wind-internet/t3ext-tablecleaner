@@ -5,10 +5,10 @@
         <header/>
         <body>
             <trans-unit id="pages.tx_tablecleaner_exclude">
-                <source>Exclude page from tablecleaner</source>
+                <target>Pagina uitsluiten van opschoning</target>
             </trans-unit>
             <trans-unit id="pages.tx_tablecleaner_exclude_branch">
-                <source>Exclude branch from tablecleaner</source>
+                <target>Tak uitsluiten van opschoning</target>
             </trans-unit>
         </body>
     </file>
