@@ -28,44 +28,44 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class PageRepository extends Repository
 {
 
-	/**
-	 * @var array
-	 */
-	protected $defaultOrderings = array(
-		'sorting' => QueryInterface::ORDER_ASCENDING
-	);
+    /**
+     * @var array
+     */
+    protected $defaultOrderings = array(
+        'sorting' => QueryInterface::ORDER_ASCENDING
+    );
 
-	/**
-	 * Initialize repository
-	 *
-	 * @return void
-	 */
-	public function initializeObject()
-	{
-		$defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
-		$defaultQuerySettings->setIgnoreEnableFields(true);
-		$defaultQuerySettings->setRespectStoragePage(false);
-		$this->setDefaultQuerySettings($defaultQuerySettings);
-	}
+    /**
+     * Initialize repository
+     *
+     * @return void
+     */
+    public function initializeObject()
+    {
+        $defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $defaultQuerySettings->setIgnoreEnableFields(true);
+        $defaultQuerySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($defaultQuerySettings);
+    }
 
-	/**
-	 * Find by list of uids
-	 *
-	 * @param array $ids
-	 *
-	 * @return array
-	 * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-	 */
-	public function findByUids($ids)
-	{
-		$query = $this->createQuery();
+    /**
+     * Find by list of uids
+     *
+     * @param array $ids
+     *
+     * @return array
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findByUids($ids)
+    {
+        $query = $this->createQuery();
 
-		return $query->matching(
-			$query->logicalAnd(
-				$query->in('uid', $ids),
-				$query->equals('deleted', 0)
-			)
-		)
-			->execute();
-	}
+        return $query->matching(
+            $query->logicalAnd(
+                $query->in('uid', $ids),
+                $query->equals('deleted', 0)
+            )
+        )
+            ->execute();
+    }
 }

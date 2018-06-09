@@ -32,152 +32,152 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class Base extends AbstractTask
 {
 
-	/**
-	 * Array of tables
-	 *
-	 * @var array
-	 */
-	protected $tables;
+    /**
+     * Array of tables
+     *
+     * @var array
+     */
+    protected $tables;
 
-	/**
-	 * Days
-	 *
-	 * @var integer
-	 */
-	protected $dayLimit;
+    /**
+     * Days
+     *
+     * @var integer
+     */
+    protected $dayLimit;
 
-	/**
-	 * Optimize table option
-	 *
-	 * @var boolean
-	 */
-	protected $optimizeOption;
+    /**
+     * Optimize table option
+     *
+     * @var boolean
+     */
+    protected $optimizeOption;
 
-	/**
-	 * Mark as deleted
-	 *
-	 * @var boolean
-	 */
-	protected $markAsDeleted;
+    /**
+     * Mark as deleted
+     *
+     * @var boolean
+     */
+    protected $markAsDeleted;
 
-	/**
-	 * Get the value of the protected property tables.
-	 *
-	 * @return array of tables
-	 */
-	public function getTables()
-	{
-		return $this->tables;
-	}
+    /**
+     * Get the value of the protected property tables.
+     *
+     * @return array of tables
+     */
+    public function getTables()
+    {
+        return $this->tables;
+    }
 
-	/**
-	 * Set the value of the private property tables.
-	 *
-	 * @param array $tables
-	 *
-	 * @return void
-	 */
-	public function setTables($tables)
-	{
-		$this->tables = $tables;
-	}
+    /**
+     * Set the value of the private property tables.
+     *
+     * @param array $tables
+     *
+     * @return void
+     */
+    public function setTables($tables)
+    {
+        $this->tables = $tables;
+    }
 
-	/**
-	 * Get the value of the protected property dayLimit.
-	 *
-	 * @return integer dayLimit
-	 */
-	public function getDayLimit()
-	{
-		return $this->dayLimit;
-	}
+    /**
+     * Get the value of the protected property dayLimit.
+     *
+     * @return integer dayLimit
+     */
+    public function getDayLimit()
+    {
+        return $this->dayLimit;
+    }
 
-	/**
-	 * Set the value of the private property dayLimit.
-	 *
-	 * @param integer $dayLimit Number of days after which to remove the records
-	 *
-	 * @return void
-	 */
-	public function setDayLimit($dayLimit)
-	{
-		$this->dayLimit = $dayLimit;
-	}
+    /**
+     * Set the value of the private property dayLimit.
+     *
+     * @param integer $dayLimit Number of days after which to remove the records
+     *
+     * @return void
+     */
+    public function setDayLimit($dayLimit)
+    {
+        $this->dayLimit = $dayLimit;
+    }
 
-	/**
-	 * Get the value of the protected property optimizeOption.
-	 *
-	 * @return integer optimizeOption
-	 */
-	public function getOptimizeOption()
-	{
-		return $this->optimizeOption;
-	}
+    /**
+     * Get the value of the protected property optimizeOption.
+     *
+     * @return integer optimizeOption
+     */
+    public function getOptimizeOption()
+    {
+        return $this->optimizeOption;
+    }
 
-	/**
-	 * Set the value of the private property optimizeOption.
-	 *
-	 * @param integer $optimizeOption Number of days after which to remove the records
-	 *
-	 * @return void
-	 */
-	public function setOptimizeOption($optimizeOption)
-	{
-		$this->optimizeOption = $optimizeOption;
-	}
+    /**
+     * Set the value of the private property optimizeOption.
+     *
+     * @param integer $optimizeOption Number of days after which to remove the records
+     *
+     * @return void
+     */
+    public function setOptimizeOption($optimizeOption)
+    {
+        $this->optimizeOption = $optimizeOption;
+    }
 
-	/**
-	 * @param boolean $markAsDeleted
-	 *
-	 * @return $this to allow for chaining
-	 */
-	public function setMarkAsDeleted($markAsDeleted)
-	{
-		$this->markAsDeleted = $markAsDeleted;
-		return $this;
-	}
+    /**
+     * @param boolean $markAsDeleted
+     *
+     * @return $this to allow for chaining
+     */
+    public function setMarkAsDeleted($markAsDeleted)
+    {
+        $this->markAsDeleted = $markAsDeleted;
+        return $this;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function getMarkAsDeleted()
-	{
-		return $this->markAsDeleted;
-	}
+    /**
+     * @return boolean
+     */
+    public function getMarkAsDeleted()
+    {
+        return $this->markAsDeleted;
+    }
 
-	/**
-	 * Get the where clause
-	 *
-	 * @param $table
-	 *
-	 * @return string
-	 */
-	public function getWhereClause($table)
-	{
-		$excludePages = \MichielRoos\Tablecleaner\Utility\Base::fetchExcludedPages();
-		$tablesWithPid = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithPid();
-		$where = ' tstamp < ' . strtotime('-' . (int)$this->dayLimit . 'days');
-		if (!empty($excludePages) && in_array($table, $tablesWithPid)) {
-			if ($table === 'pages') {
-				$where .= ' AND NOT uid IN(' . implode(',', $excludePages) . ')';
-			} else {
-				$where .= ' AND NOT pid IN(' . implode(',', $excludePages) . ')';
-			}
-		}
-		return $where;
-	}
+    /**
+     * Get the where clause
+     *
+     * @param $table
+     *
+     * @return string
+     */
+    public function getWhereClause($table)
+    {
+        $excludePages = \MichielRoos\Tablecleaner\Utility\Base::fetchExcludedPages();
+        $tablesWithPid = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithPid();
+        $where = ' tstamp < ' . strtotime('-' . (int)$this->dayLimit . 'days');
+        if (!empty($excludePages) && in_array($table, $tablesWithPid)) {
+            if ($table === 'pages') {
+                $where .= ' AND NOT uid IN(' . implode(',', $excludePages) . ')';
+            } else {
+                $where .= ' AND NOT pid IN(' . implode(',', $excludePages) . ')';
+            }
+        }
+        return $where;
+    }
 
-	/**
-	 * This is the main method that is called when a task is executed
-	 * It MUST be implemented by all classes inheriting from this one
-	 * Note that there is no error handling, errors and failures are expected
-	 * to be handled and logged by the client implementations.
-	 * Should return true on successful execution, false on error.
-	 *
-	 * @return boolean   Returns true on successful execution, false on error
-	 */
-	public function execute()
-	{
-		// TODO: Implement execute() method.
-	}
+    /**
+     * This is the main method that is called when a task is executed
+     * It MUST be implemented by all classes inheriting from this one
+     * Note that there is no error handling, errors and failures are expected
+     * to be handled and logged by the client implementations.
+     * Should return true on successful execution, false on error.
+     *
+     * @return boolean   Returns true on successful execution, false on error
+     */
+    public function execute()
+    {
+        // TODO: Implement execute() method.
+    }
 }

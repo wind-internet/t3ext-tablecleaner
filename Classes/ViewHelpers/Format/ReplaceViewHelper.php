@@ -45,17 +45,17 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class ReplaceViewHelper extends AbstractViewHelper
 {
 
-	/**
-	 * Do a simple search and replace on a string
-	 *
-	 * @param string $search
-	 * @param string $replace
-	 *
-	 * @return string
-	 */
-	public function render($search = '', $replace = '')
-	{
-		$subject = $this->renderChildren();
-		return str_replace($search, $replace, $subject);
-	}
+    /**
+     * Do a simple search and replace on a string
+     *
+     * @param string $search
+     * @param string $replace
+     *
+     * @return string
+     */
+    public function render($search = '', $replace = '')
+    {
+        $subject = $this->renderChildren();
+        return str_replace($search, $replace, $subject);
+    }
 }

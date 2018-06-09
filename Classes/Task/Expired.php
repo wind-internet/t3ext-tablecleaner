@@ -24,40 +24,40 @@ namespace MichielRoos\Tablecleaner\Task;
 class Expired extends Base
 {
 
-	/**
-	 * Function executed from the Scheduler.
-	 *
-	 * @return boolean
-	 */
-	public function execute()
-	{
-		$successfullyExecuted = true;
+    /**
+     * Function executed from the Scheduler.
+     *
+     * @return boolean
+     */
+    public function execute()
+    {
+        $successfullyExecuted = true;
 
-		foreach ($this->tables as $table) {
-			$GLOBALS['TYPO3_DB']->exec_DELETEquery($table, $this->getWhereClause($table));
-			$error = $GLOBALS['TYPO3_DB']->sql_error();
-			if (!$error && $this->optimizeOption) {
-				$GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
-				$error = $GLOBALS['TYPO3_DB']->sql_error();
-			}
-			if ($error) {
-				$successfullyExecuted = false;
-			}
-		}
-		return $successfullyExecuted;
-	}
+        foreach ($this->tables as $table) {
+            $GLOBALS['TYPO3_DB']->exec_DELETEquery($table, $this->getWhereClause($table));
+            $error = $GLOBALS['TYPO3_DB']->sql_error();
+            if (!$error && $this->optimizeOption) {
+                $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
+                $error = $GLOBALS['TYPO3_DB']->sql_error();
+            }
+            if ($error) {
+                $successfullyExecuted = false;
+            }
+        }
+        return $successfullyExecuted;
+    }
 
-	/**
-	 * Returns some additional information about indexing progress, shown in
-	 * the scheduler's task overview list.
-	 *
-	 * @return string Information to display
-	 */
-	public function getAdditionalInformation()
-	{
-		$string = $GLOBALS['LANG']->sL(
-			'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.additionalInformation'
-		);
-		return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables));
-	}
+    /**
+     * Returns some additional information about indexing progress, shown in
+     * the scheduler's task overview list.
+     *
+     * @return string Information to display
+     */
+    public function getAdditionalInformation()
+    {
+        $string = $GLOBALS['LANG']->sL(
+            'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.additionalInformation'
+        );
+        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables));
+    }
 }

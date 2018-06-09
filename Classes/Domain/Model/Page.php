@@ -31,43 +31,43 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Page extends AbstractEntity
 {
-	/**
-	 * @var boolean
-	 */
-	protected $exclude;
+    /**
+     * @var boolean
+     */
+    protected $exclude;
 
-	/**
-	 * @var boolean
-	 */
-	protected $excludeBranch;
+    /**
+     * @var boolean
+     */
+    protected $excludeBranch;
 
-	/**
-	 *  * @var string
-	 *  */
-	protected $title;
+    /**
+     *  * @var string
+     *  */
+    protected $title;
 
-	/**
-	 * @return boolean
-	 */
-	public function getExclude()
-	{
-		return $this->exclude;
-	}
+    /**
+     * @return boolean
+     */
+    public function getExclude()
+    {
+        return $this->exclude;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function getExcludeBranch()
-	{
-		return $this->excludeBranch;
-	}
+    /**
+     * @return boolean
+     */
+    public function getExcludeBranch()
+    {
+        return $this->excludeBranch;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
 }

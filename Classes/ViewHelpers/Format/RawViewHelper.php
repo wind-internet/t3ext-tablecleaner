@@ -55,17 +55,17 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class RawViewHelper extends AbstractViewHelper
 {
 
-	/**
-	 * @param mixed $value The value to output
-	 *
-	 * @return string
-	 */
-	public function render($value = null)
-	{
-		if ($value === null) {
-			return $this->renderChildren();
-		} else {
-			return $value;
-		}
-	}
+    /**
+     * @param mixed $value The value to output
+     *
+     * @return string
+     */
+    public function render($value = null)
+    {
+        if ($value === null) {
+            return $this->renderChildren();
+        } else {
+            return $value;
+        }
+    }
 }

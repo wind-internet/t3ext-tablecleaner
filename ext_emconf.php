@@ -17,37 +17,37 @@
  */
 
 $EM_CONF[$_EXTKEY] = [
-	'title' => 'Table Cleaner',
-	'description' => 'Removes [deleted/hidden] records older than [N] days from tables.',
-	'category' => 'be',
-	'shy' => 0,
-	'version' => '2.5.0',
-	'dependencies' => '',
-	'conflicts' => '',
-	'priority' => '',
-	'loadOrder' => '',
-	'module' => '',
-	'state' => 'stable',
-	'uploadfolder' => 0,
-	'createDirs' => '',
-	'modify_tables' => 'pages',
-	'clearcacheonload' => 0,
-	'lockType' => '',
-	'author' => 'Michiel Roos',
-	'author_email' => 'michiel@michielroos.com',
-	'author_company' => 'Michiel Roos',
-	'CGLcompliance' => '',
-	'CGLcompliance_note' => '',
-	'constraints' => [
-		'depends' => [
-			'typo3' => '4.5.0-6.2.99',
-		],
-		'conflicts' => [
-		],
-		'suggests' => [
-		],
-	],
-	'autoload' => [
-		'psr-4' => ['MichielRoos\\Tablecleaner\\' => 'Classes']
-	]
+    'title' => 'Table Cleaner',
+    'description' => 'Removes [deleted/hidden] records older than [N] days from tables.',
+    'category' => 'be',
+    'shy' => 0,
+    'version' => '2.5.0',
+    'dependencies' => '',
+    'conflicts' => '',
+    'priority' => '',
+    'loadOrder' => '',
+    'module' => '',
+    'state' => 'stable',
+    'uploadfolder' => 0,
+    'createDirs' => '',
+    'modify_tables' => 'pages',
+    'clearcacheonload' => 0,
+    'lockType' => '',
+    'author' => 'Michiel Roos',
+    'author_email' => 'michiel@michielroos.com',
+    'author_company' => 'Michiel Roos',
+    'CGLcompliance' => '',
+    'CGLcompliance_note' => '',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '4.5.0-6.2.99',
+        ],
+        'conflicts' => [
+        ],
+        'suggests' => [
+        ],
+    ],
+    'autoload' => [
+        'psr-4' => ['MichielRoos\\Tablecleaner\\' => 'Classes']
+    ]
 ];
