@@ -18,6 +18,7 @@ namespace MichielRoos\Tablecleaner\Task;
  */
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -98,6 +99,25 @@ class DeletedAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $additionalFields[$fieldId] = array(
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.dayLimit',
+            'cshKey' => 'tablecleaner',
+            'cshLabel' => $fieldId,
+        );
+
+        // limit
+        if (empty($taskInfo['limit'])) {
+            if ($schedulerModule->CMD == 'add') {
+                $taskInfo['limit'] = '10000';
+            } else {
+                $taskInfo['limit'] = $task->getLimit();
+            }
+        }
+
+        $fieldId = 'task_limit';
+        $fieldCode = '<input type="text" name="tx_scheduler[limit]" id="' .
+            $fieldId . '" value="' . htmlspecialchars($taskInfo['limit']) . '"/>';
+        $additionalFields[$fieldId] = array(
+            'code' => $fieldCode,
+            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.limit',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
         );
@@ -199,6 +219,16 @@ class DeletedAdditionalFieldProvider implements AdditionalFieldProviderInterface
             );
         }
 
+        if (!MathUtility::canBeInterpretedAsInteger($submittedData['limit'])) {
+            $isValid = false;
+            $schedulerModule->addMessage(
+                $GLOBALS['LANG']->sL(
+                    'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidLimit'
+                ),
+                FlashMessage::ERROR
+            );
+        }
+
         return $isValid;
     }
 
@@ -213,8 +243,9 @@ class DeletedAdditionalFieldProvider implements AdditionalFieldProviderInterface
      */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
-        /** @var $task tx_tablecleaner_tasks_Base */
-        $task->setDayLimit(intval($submittedData['deletedDayLimit']));
+        /** @var $task Base */
+        $task->setDayLimit((int)$submittedData['deletedDayLimit']);
+        $task->setLimit((int)$submittedData['limit']);
         $task->setOptimizeOption($submittedData['optimizeOption'] === 'checked');
         $task->setTables($submittedData['deletedTables']);
     }

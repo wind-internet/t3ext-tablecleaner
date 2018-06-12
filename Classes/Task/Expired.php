@@ -34,7 +34,12 @@ class Expired extends Base
         $successfullyExecuted = true;
 
         foreach ($this->tables as $table) {
-            $GLOBALS['TYPO3_DB']->exec_DELETEquery($table, $this->getWhereClause($table));
+            $GLOBALS['TYPO3_DB']->sql_query(sprintf(
+                'DELETE FROM %s WHERE %s LIMIT %d',
+                $table,
+                $this->getWhereClause($table),
+                $this->limit
+            ));
             $error = $GLOBALS['TYPO3_DB']->sql_error();
             if (!$error && $this->optimizeOption) {
                 $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
@@ -58,6 +63,6 @@ class Expired extends Base
         $string = $GLOBALS['LANG']->sL(
             'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.additionalInformation'
         );
-        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables));
+        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

@@ -46,8 +46,11 @@
             <trans-unit id="tasks.deleted.dayLimit">
                 <source>Remove deleted entries older than given number of days</source>
             </trans-unit>
+            <trans-unit id="tasks.deleted.limit">
+                <source>Maximum amount of rows to handle per run</source>
+            </trans-unit>
             <trans-unit id="tasks.deleted.additionalInformation">
-                <source>Remove deleted entries older than %s days from tables: %s</source>
+                <source>Remove deleted entries older than %s days from tables: %s in batches of %d</source>
             </trans-unit>
             <trans-unit id="tasks.expired.title">
                 <source>Table Cleaner: remove expired entries</source>
@@ -59,7 +62,7 @@
                 <source>Delete entries older than given number of days</source>
             </trans-unit>
             <trans-unit id="tasks.expired.additionalInformation">
-                <source>Remove entries older than %s days from tables: %s</source>
+                <source>Remove entries older than %s days from tables: %s in batches of %d</source>
             </trans-unit>
             <trans-unit id="tasks.general.additionalInformationExclude">
                 <source>except from pages %s</source>
@@ -75,6 +78,9 @@
             </trans-unit>
             <trans-unit id="tasks.general.noTables">
                 <source>Please select one or more tables to clean</source>
+            </trans-unit>
+            <trans-unit id="tasks.general.invalidLimit">
+                <source>Please specify an integer for the limit field</source>
             </trans-unit>
             <trans-unit id="tasks.general.invalidTables">
                 <source>You somehow selected a table that is not available</source>
@@ -97,7 +103,7 @@
                 <source>Remove hidden entries older than given number of days</source>
             </trans-unit>
             <trans-unit id="tasks.hidden.additionalInformation">
-                <source>Remove hidden entries older than %s days from tables: %s</source>
+                <source>Remove hidden entries older than %s days from tables: %s in batches of %d</source>
             </trans-unit>
         </body>
     </file>

@@ -46,8 +46,11 @@
             <trans-unit id="tasks.deleted.dayLimit">
                 <target>Verwijder 'verwijderde' rijen ouder dan het opgegeven aantal dagen</target>
             </trans-unit>
+            <trans-unit id="tasks.deleted.limit">
+                <source>Maximaal aantal te bewerken rijen</source>
+            </trans-unit>
             <trans-unit id="tasks.deleted.additionalInformation">
-                <target>Verwijder 'verwijderde' rijen ouder dan %s dagen van tabellen: %s</target>
+                <target>Verwijder 'verwijderde' rijen ouder dan %s dagen van tabellen: %s in batches van %d</target>
             </trans-unit>
             <trans-unit id="tasks.expired.title">
                 <target>Tabel Opschonen: verouderde rijen</target>
@@ -59,7 +62,7 @@
                 <target>Verwijder rijen ouder dan het opgegeven aantal dagen</target>
             </trans-unit>
             <trans-unit id="tasks.expired.additionalInformation">
-                <target>Verwijder rijen ouder dan %s dagen van tabellen: %s</target>
+                <target>Verwijder rijen ouder dan %s dagen van tabellen: %s in batches van %d</target>
             </trans-unit>
             <trans-unit id="tasks.general.additionalInformationExclude">
                 <target>behalve van pagina's %s</target>
@@ -97,7 +100,7 @@
                 <target>Verwijder verborgen rijen ouder dan het opgegeven aantal dagen</target>
             </trans-unit>
             <trans-unit id="tasks.hidden.additionalInformation">
-                <target>Verwijder verborgen rijen ouder dan %s dagen van tabellen: %s</target>
+                <target>Verwijder verborgen rijen ouder dan %s dagen van tabellen: %s in batches van %d</target>
             </trans-unit>
         </body>
     </file>

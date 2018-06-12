@@ -37,20 +37,26 @@ class Hidden extends Base
             $where = 'hidden = 1 AND ' . $this->getWhereClause($table);
             if ($this->markAsDeleted && in_array($table,
                     \MichielRoos\Tablecleaner\Utility\Base::getTablesWithDeletedAndTstamp())) {
-                $fieldValues = array(
-                    'tstamp' => $_SERVER['REQUEST_TIME'],
-                    'deleted' => 1
-                );
-                $GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, $where, $fieldValues);
+                $GLOBALS['TYPO3_DB']->sql_query(sprintf(
+                    'UPDATE %s SET tstamp = %s, deleted = 1 WHERE %s LIMIT %d',
+                    $table,
+                    $_SERVER['REQUEST_TIME'],
+                    $where,
+                    $this->limit
+                ));
             } else {
-                $GLOBALS['TYPO3_DB']->exec_DELETEquery($table, $where);
-                $error = $GLOBALS['TYPO3_DB']->sql_error();
-                if (!$error && $this->optimizeOption) {
-                    $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
-                }
+                $GLOBALS['TYPO3_DB']->sql_query(sprintf(
+                    'DELETE FROM %s WHERE %s LIMIT %d',
+                    $table,
+                    $where,
+                    $this->limit
+                ));
             }
-            if ($GLOBALS['TYPO3_DB']->sql_error()) {
+            $error = $GLOBALS['TYPO3_DB']->sql_error();
+            if ($error) {
                 $successfullyExecuted = false;
+            } elseif ($this->optimizeOption) {
+                $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
             }
         }
         return $successfullyExecuted;
@@ -67,6 +73,6 @@ class Hidden extends Base
         $string = $GLOBALS['LANG']->sL(
             'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.additionalInformation'
         );
-        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables));
+        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

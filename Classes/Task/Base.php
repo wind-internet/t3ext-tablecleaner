@@ -47,6 +47,13 @@ class Base extends AbstractTask
     protected $dayLimit;
 
     /**
+     * Maximum amount of rows to remove per run
+     *
+     * @var integer
+     */
+    protected $limit;
+
+    /**
      * Optimize table option
      *
      * @var boolean
@@ -80,6 +87,28 @@ class Base extends AbstractTask
     public function setTables($tables)
     {
         $this->tables = $tables;
+    }
+
+    /**
+     * Get the value of the protected property limit.
+     *
+     * @return integer limit
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * Set the value of the private property limit.
+     *
+     * @param integer $limit Maximum amount of rows to remove per run
+     *
+     * @return void
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
     }
 
     /**

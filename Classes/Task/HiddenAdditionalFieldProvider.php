@@ -34,8 +34,7 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
      *
      * @param  array $taskInfo
      * @param  Hidden $task : task object
-     * @param  SchedulerModuleController $schedulerModule : reference to the calling
-     *    object (BE module of the Scheduler)
+     * @param  SchedulerModuleController $schedulerModule : reference to the calling object (BE module of the Scheduler)
      *
      * @internal  param array $taksInfo : array information of task to return
      * @return  array      additional fields
@@ -120,6 +119,25 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
             'cshLabel' => 'task_markAsDeleted',
         );
 
+        // limit
+        if (empty($taskInfo['limit'])) {
+            if ($schedulerModule->CMD == 'add') {
+                $taskInfo['limit'] = '10000';
+            } else {
+                $taskInfo['limit'] = $task->getLimit();
+            }
+        }
+
+        $fieldId = 'task_limit';
+        $fieldCode = '<input type="text" name="tx_scheduler[limit]" id="' .
+            $fieldId . '" value="' . htmlspecialchars($taskInfo['limit']) . '"/>';
+        $additionalFields[$fieldId] = array(
+            'code' => $fieldCode,
+            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.limit',
+            'cshKey' => 'tablecleaner',
+            'cshLabel' => $fieldId,
+        );
+
         // 'Optimize table' option
         if ($taskInfo['optimizeOption'] !== 'checked') {
             $taskInfo['optimizeOption'] = '';
@@ -172,13 +190,10 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
      * This method checks any additional data that is relevant to the specific task.
      * If the task class is not relevant, the method is expected to return TRUE.
      *
-     * @param   array $submittedData : reference to the array containing the
-     *    data submitted by the user
-     * @param SchedulerModuleController $schedulerModule :
-     *    reference to the calling object (BE module of the Scheduler)
+     * @param   array $submittedData : reference to the array containing the data submitted by the user
+     * @param SchedulerModuleController $schedulerModule : reference to the calling object (BE module of the Scheduler)
      *
-     * @return   boolean      True if validation was ok (or selected class is
-     *    not relevant), FALSE otherwise
+     * @return   boolean      True if validation was ok (or selected class is not relevant), FALSE otherwise
      */
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
     {
@@ -215,6 +230,16 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
             );
         }
 
+        if (!MathUtility::canBeInterpretedAsInteger($submittedData['limit'])) {
+            $isValid = false;
+            $schedulerModule->addMessage(
+                $GLOBALS['LANG']->sL(
+                    'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidLimit'
+                ),
+                FlashMessage::ERROR
+            );
+        }
+
         $submittedData['markAsDeleted'] = intval($submittedData['markAsDeleted']);
 
         return $isValid;
@@ -224,16 +249,16 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
      * This method is used to save any additional input into the current task object
      * if the task class matches.
      *
-     * @param   array $submittedData : array containing the data submitted by
-     *    the user
+     * @param   array $submittedData : array containing the data submitted by the user
      * @param   AbstractTask $task : reference to the current task object
      *
      * @return   void
      */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
-        /** @var $task tx_tablecleaner_tasks_Base */
-        $task->setDayLimit(intval($submittedData['dayLimit']));
+        /** @var $task Base */
+        $task->setDayLimit((int)$submittedData['dayLimit']);
+        $task->setLimit((int)$submittedData['limit']);
         $task->setMarkAsDeleted($submittedData['markAsDeleted']);
         $task->setOptimizeOption($submittedData['optimizeOption'] === 'checked');
         $task->setTables($submittedData['hiddenTables']);

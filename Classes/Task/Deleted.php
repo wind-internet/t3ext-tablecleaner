@@ -35,7 +35,12 @@ class Deleted extends Base
 
         foreach ($this->tables as $table) {
             $where = 'deleted = 1 AND ' . $this->getWhereClause($table);
-            $GLOBALS['TYPO3_DB']->exec_DELETEquery($table, $where);
+            $GLOBALS['TYPO3_DB']->sql_query(sprintf(
+                'DELETE FROM %s WHERE %s LIMIT %d',
+                $table,
+                $where,
+                $this->limit
+            ));
             $error = $GLOBALS['TYPO3_DB']->sql_error();
             if (!$error && $this->optimizeOption) {
                 $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
@@ -59,6 +64,6 @@ class Deleted extends Base
         $string = $GLOBALS['LANG']->sL(
             'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.additionalInformation'
         );
-        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables));
+        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }
