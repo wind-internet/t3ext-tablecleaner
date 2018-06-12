@@ -17,8 +17,10 @@ namespace MichielRoos\Tablecleaner\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use MichielRoos\Tablecleaner\Domain\Model\Page;
 use MichielRoos\Tablecleaner\Domain\Repository\PageRepository;
 use MichielRoos\Tablecleaner\Utility\Base;
+use TYPO3\CMS\Backend\Tree\View\BrowseTreeView;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -58,8 +60,8 @@ class InfoModuleController extends ActionController
         $values['startingPage'] = $this->pageRepository->findOneByUid($uid);
 
         // Initialize tree object:
-        /** @var t3lib_browsetree $tree */
-        $tree = GeneralUtility::makeInstance('t3lib_browsetree');
+        /** @var BrowseTreeView $tree */
+        $tree = GeneralUtility::makeInstance(BrowseTreeView::class);
         // Also store tree prefix markup:
         $tree->expandFirst = true;
         $tree->addField('tx_tablecleaner_exclude', true);
@@ -68,7 +70,6 @@ class InfoModuleController extends ActionController
         $tree->table = 'pages';
         // Set starting page id of the tree (overrides webmounts):
         $tree->setTreeName('tablecleaner_' . $uid);
-        $this->MOUNTS = $GLOBALS['WEBMOUNTS'];
 
         $tree->init();
         $treeData = $this->getTreeData($uid, $tree->subLevelID);
@@ -76,7 +77,6 @@ class InfoModuleController extends ActionController
 
         $tree->getTree($uid);
         $tree->ext_IconMode = true;
-        $tree->ext_showPageId = $GLOBALS['BE_USER']->getTSConfigVal('options.pageTree.showPageIdWithTitle');
         $tree->showDefaultTitleAttribute = true;
         /**
          * Hmmm . . . need php_http module for this, can't count on that :-(
@@ -105,7 +105,6 @@ class InfoModuleController extends ActionController
      */
     protected function getTreeData($uid, $subLevelId)
     {
-
         // Filter the results by preference and access
         $clauseExludePidList = '';
         if ($pidList = $GLOBALS['BE_USER']->getTSConfigVal('options.hideRecords.pages')) {
@@ -184,7 +183,9 @@ class InfoModuleController extends ActionController
             $foundPages = [];
         }
         $allPages = [];
+        /** @var Page $page */
         foreach ($foundPages as $page) {
+            $page = $page->toArray();
             $allPages[$page['uid']] = $page;
         }
 
@@ -222,5 +223,4 @@ class InfoModuleController extends ActionController
         }
         return $branches;
     }
-
 }

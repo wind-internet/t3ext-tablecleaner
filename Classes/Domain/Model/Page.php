@@ -70,4 +70,18 @@ class Page extends AbstractEntity
         return $this->title;
     }
 
+    /**
+     * Convert object to array
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'uid' => $this->getUid(),
+            'pid' => $this->getPid(),
+            'title' => $this->getTitle(),
+            'tx_tablecleaner_exclude' => $this->getExclude(),
+            'tx_tablecleaner_exclude_branch' => $this->getExcludeBranch()
+        ];
+    }
 }

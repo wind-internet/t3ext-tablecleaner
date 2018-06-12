@@ -120,8 +120,11 @@ class Base
      */
     public static function fetchChildPages($pageId)
     {
-        $res = $GLOBALS['TYPO3_DB']->sql_query('SELECT uid FROM pages WHERE pid = ' . $pageId);
         $pageIds = [];
+        if (!$pageId) {
+            return $pageIds;
+        }
+        $res = $GLOBALS['TYPO3_DB']->sql_query('SELECT uid FROM pages WHERE pid = ' . $pageId);
         $pageIds[] = $pageId;
         while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
             $pageIds[] = $row['uid'];
