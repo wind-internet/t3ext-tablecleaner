@@ -38,7 +38,7 @@
                 <source>Page and all child pages are excluded from cleaning</source>
             </trans-unit>
             <trans-unit id="tasks.deleted.title">
-                <source>Table Cleaner: remove deleted entries</source>
+                <source>Remove deleted entries</source>
             </trans-unit>
             <trans-unit id="tasks.deleted.description">
                 <source>Removes deleted entries older than N days from tables.</source>
@@ -53,7 +53,7 @@
                 <source>Remove deleted entries older than %s days from tables: %s in batches of %d</source>
             </trans-unit>
             <trans-unit id="tasks.expired.title">
-                <source>Table Cleaner: remove expired entries</source>
+                <source>Remove expired entries</source>
             </trans-unit>
             <trans-unit id="tasks.expired.description">
                 <source>Removes entries older than N days from tables.</source>
@@ -94,7 +94,7 @@
                 </source>
             </trans-unit>
             <trans-unit id="tasks.hidden.title">
-                <source>Table Cleaner: remove hidden entries</source>
+                <source>Remove hidden entries</source>
             </trans-unit>
             <trans-unit id="tasks.hidden.description">
                 <source>Removes hidden entries older than N days from tables.</source>
