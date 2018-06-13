@@ -26,10 +26,11 @@ git clone https://github.com/Tuurlijk/t3ext-tablecleaner.git tablecleaner
 ```
 
 ### Usage
-In the scheduler you will find three new tasks:
-* Table Cleaner: remove deleted entries (tablecleaner)
-* Table Cleaner: remove expired entries (tablecleaner)
-* Table Cleaner: remove hidden entries (tablecleaner)
+In the scheduler you will find three new tasks in the section 'tablecleaner':
+* Remove deleted entries
+* Remove expired entries
+* Remove hidden entries
+
 You can set a retention time in days for each task. If you need different retention times for different tables, just create separate tasks for each table and time combination.
 
 You can find these options in page properties under the visibility section on the 'Access' tab.
@@ -73,7 +74,7 @@ Clicking on a page title will bring you straight to the page properties of that 
 * Use DataHandler
 
 ## Known problems
-If you find any problems, [please report them](https://github.com/Tuurlijk/t3ext-tablecleaner/issues).
+If you find any problems; [please report them](https://github.com/Tuurlijk/t3ext-tablecleaner/issues).
 
 Please take some time and make a proper report stating at least:
 * version of the extension
@@ -81,4 +82,5 @@ Please take some time and make a proper report stating at least:
 * steps to reproduce
 * observed behavior
 * expected behavior
+
 Writing a good bug report will help us to fix the bugs faster and better.
