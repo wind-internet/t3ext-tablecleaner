@@ -26,9 +26,9 @@ You can find these options in page properties under the visibility section on th
 There is one exclusion to this rule; when cleaning the pages table, the pages themselves will be excluded from the cleaning process.
 
 You can also recursively exclude pages from the cleaning process.
+
 Remove deleted entries
 **********************
-
 In the table cleaner task, you can select one or more tables for cleaning. You can also specify a number of days after which to actually remove the deleted records from the table. The default is 31 days.
 
 .. figure:: ../Image/TableCleanerRemoveDeleted.png
