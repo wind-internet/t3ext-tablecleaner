@@ -170,7 +170,7 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
     }
 
     /**
-     * Get all tables
+     * Get all tables containing hist,log,error,cache,stat in the name AND having a tstamp column
      *
      * @return array $tables  The tables
      */
@@ -181,7 +181,7 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
             "SELECT DISTINCT TABLE_NAME
 			FROM INFORMATION_SCHEMA.COLUMNS
 			WHERE (
-				(TABLE_NAME LIKE '%log%' AND NOT (TABLE_NAME LIKE '%blog%'))
+				(TABLE_NAME LIKE '%log%' AND NOT (TABLE_NAME LIKE '%blog%') AND NOT (TABLE_NAME LIKE '%catalog%') AND NOT (TABLE_NAME LIKE '%dialog%'))
 				OR TABLE_NAME LIKE '%hist%'
 				OR TABLE_NAME LIKE '%error%'
 				OR TABLE_NAME LIKE '%cache%'
@@ -195,6 +195,7 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
                 $tables[] = $result['TABLE_NAME'];
             };
         }
+
         return $tables;
     }
 
