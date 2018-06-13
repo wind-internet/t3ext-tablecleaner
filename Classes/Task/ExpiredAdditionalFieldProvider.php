@@ -275,7 +275,7 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
     {
         /** @var $task Expired */
         $task->setDayLimit((int)$submittedData['expiredDayLimit']);
-        $task->setLimit((int)$submittedData['expiredLimit']);
+        $task->setLimit((int)$submittedData['limit']);
         $task->setOptimizeOption($submittedData['optimizeOption'] == 'checked');
         $task->setTables($submittedData['expiredTables']);
     }
