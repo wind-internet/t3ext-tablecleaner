@@ -41,7 +41,7 @@ You can also recursively exclude pages from the cleaning process.
 #### Remove deleted entries
 In the table cleaner task, you can select one or more tables for cleaning. You can also specify a number of days after which to actually remove the deleted records from the table. The default is 31 days.
 
-![](Resources/Public/Image/Documentation/TableCleanerRemoveDeleted.png)
+![](Documentation/Image/TableCleanerRemoveDeleted.png)
 
 If you wish to set different retentions for different tables, you can create multiple scheduler tasks and then specify a different retention time for each task.
 
@@ -50,14 +50,14 @@ In the remove expired entries task, you can select one or more tables for cleani
 
 _*NB! Please note that this task is the most aggressive cleaner since it ignores the deleted and hidden flags and only looks at the 'tstamp' field when removing records.*_
 
-![](Resources/Public/Image/Documentation/TableCleanerRemoveExpired.png)
+![](Documentation/Image/TableCleanerRemoveExpired.png)
 
 If you wish to set different retentions for different tables, you can create multiple scheduler tasks and then specify a different retention time for each task.
 
 #### Table Cleaner: remove hidden entries
 In the remove hidden entries task, you can select one or more tables for cleaning. You can also specify a number of days after which to remove the hidden records from the table. The default is 31 days.
 
-![](Resources/Public/Image/Documentation/TableCleanerRemoveHidden.png)
+![](Documentation/Image/TableCleanerRemoveHidden.png)
 
 Instead of outright deleting the hidden records from the table, the cleaner can mark them as being 'deleted'. If the checkbox 'Mark records as deleted' is checked, the timestamp of the expired records will be touched and the records will be marked as 'deleted'.
 
