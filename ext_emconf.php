@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
     'description' => 'Removes [deleted/hidden] records older than [N] days from tables.',
     'category' => 'be',
     'shy' => 0,
-    'version' => '2.5.0',
+    'version' => '2.6.0',
     'dependencies' => '',
     'conflicts' => '',
     'priority' => '',
@@ -40,7 +40,7 @@ $EM_CONF[$_EXTKEY] = [
     'CGLcompliance_note' => '',
     'constraints' => [
         'depends' => [
-            'typo3' => '4.5.0-6.2.99',
+            'typo3' => '6.2.0-6.2.99',
         ],
         'conflicts' => [
         ],
