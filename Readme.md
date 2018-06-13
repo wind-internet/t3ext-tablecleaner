@@ -35,6 +35,8 @@ You can set a retention time in days for each task. If you need different retent
 
 You can find these options in page properties under the visibility section on the 'Access' tab.
 
+![](Documentation/Image/PageProperties.png)
+
 There is one exclusion to this rule; when cleaning the pages table, the pages themselves will be excluded from the cleaning process.
 
 You can also recursively exclude pages from the cleaning process.
@@ -67,6 +69,8 @@ If you wish to set different retentions for different tables, you can create mul
 
 ### Overview of excluded pages
 There is a backend module that shows you an overview of what pages and branches are excluded in the TYPO3 page tree or any selected branch.
+
+![](Documentation/Image/Module.png)
 
 Clicking on a page title will bring you straight to the page properties of that page.
 
