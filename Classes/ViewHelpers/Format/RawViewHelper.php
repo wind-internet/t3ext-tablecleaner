@@ -16,9 +16,7 @@ namespace MichielRoos\Tablecleaner\ViewHelpers\Format;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-
 
 /**
  * Outputs an argument/value without any escaping. Is normally used to output
@@ -54,7 +52,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class RawViewHelper extends AbstractViewHelper
 {
-
     /**
      * @param mixed $value The value to output
      *
@@ -64,8 +61,8 @@ class RawViewHelper extends AbstractViewHelper
     {
         if ($value === null) {
             return $this->renderChildren();
-        } else {
-            return $value;
         }
+
+        return $value;
     }
 }

@@ -20,15 +20,12 @@ namespace MichielRoos\Tablecleaner\Utility;
 /**
  * Base utility methods
  *
- * @package TYPO3
- * @subpackage tablecleaner
  * @version $Id:$
  * @license http://opensource.org/licenses/gpl-license.php
  *    GNU Public License, version 2
  */
 class Base
 {
-
     /**
      * Get tables with deleted and tstamp fields
      *
@@ -54,8 +51,9 @@ class Base
         if ($resource instanceof \mysqli_result) {
             while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
                 $tables[] = $result['TABLE_NAME'];
-            };
+            }
         }
+
         return $tables;
     }
 
@@ -83,8 +81,9 @@ class Base
         if ($resource instanceof \mysqli_result) {
             while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
                 $tables[] = $result['TABLE_NAME'];
-            };
+            }
         }
+
         return $tables;
     }
 
@@ -106,15 +105,16 @@ class Base
         if ($resource instanceof \mysqli_result) {
             while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
                 $tables[] = $result['TABLE_NAME'];
-            };
+            }
         }
+
         return $tables;
     }
 
     /**
      * Fetch child pages
      *
-     * @param integer $pageId
+     * @param int $pageId
      *
      * @return array $pageIds
      */
@@ -131,6 +131,7 @@ class Base
             $pageIds = array_merge($pageIds, self::fetchChildPages($row['uid']));
         }
         $GLOBALS['TYPO3_DB']->sql_free_result($res);
+
         return $pageIds;
     }
 
@@ -178,5 +179,4 @@ class Base
 
         return $pageIds;
     }
-
 }

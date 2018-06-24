@@ -27,11 +27,9 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class Base
- * @package MichielRoos\Tablecleaner\Task
  */
 class Base extends AbstractTask
 {
-
     /**
      * Array of tables
      *
@@ -42,28 +40,28 @@ class Base extends AbstractTask
     /**
      * Days
      *
-     * @var integer
+     * @var int
      */
     protected $dayLimit;
 
     /**
      * Maximum amount of rows to remove per run
      *
-     * @var integer
+     * @var int
      */
     protected $limit;
 
     /**
      * Optimize table option
      *
-     * @var boolean
+     * @var bool
      */
     protected $optimizeOption;
 
     /**
      * Mark as deleted
      *
-     * @var boolean
+     * @var bool
      */
     protected $markAsDeleted;
 
@@ -92,7 +90,7 @@ class Base extends AbstractTask
     /**
      * Get the value of the protected property limit.
      *
-     * @return integer limit
+     * @return int limit
      */
     public function getLimit()
     {
@@ -102,7 +100,7 @@ class Base extends AbstractTask
     /**
      * Set the value of the private property limit.
      *
-     * @param integer $limit Maximum amount of rows to remove per run
+     * @param int $limit Maximum amount of rows to remove per run
      *
      * @return void
      */
@@ -114,7 +112,7 @@ class Base extends AbstractTask
     /**
      * Get the value of the protected property dayLimit.
      *
-     * @return integer dayLimit
+     * @return int dayLimit
      */
     public function getDayLimit()
     {
@@ -124,7 +122,7 @@ class Base extends AbstractTask
     /**
      * Set the value of the private property dayLimit.
      *
-     * @param integer $dayLimit Number of days after which to remove the records
+     * @param int $dayLimit Number of days after which to remove the records
      *
      * @return void
      */
@@ -136,7 +134,7 @@ class Base extends AbstractTask
     /**
      * Get the value of the protected property optimizeOption.
      *
-     * @return integer optimizeOption
+     * @return int optimizeOption
      */
     public function getOptimizeOption()
     {
@@ -146,7 +144,7 @@ class Base extends AbstractTask
     /**
      * Set the value of the private property optimizeOption.
      *
-     * @param integer $optimizeOption Number of days after which to remove the records
+     * @param int $optimizeOption Number of days after which to remove the records
      *
      * @return void
      */
@@ -156,18 +154,19 @@ class Base extends AbstractTask
     }
 
     /**
-     * @param boolean $markAsDeleted
+     * @param bool $markAsDeleted
      *
      * @return $this to allow for chaining
      */
     public function setMarkAsDeleted($markAsDeleted)
     {
         $this->markAsDeleted = $markAsDeleted;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getMarkAsDeleted()
     {
@@ -193,6 +192,7 @@ class Base extends AbstractTask
                 $where .= ' AND NOT pid IN(' . implode(',', $excludePages) . ')';
             }
         }
+
         return $where;
     }
 
@@ -203,7 +203,7 @@ class Base extends AbstractTask
      * to be handled and logged by the client implementations.
      * Should return true on successful execution, false on error.
      *
-     * @return boolean   Returns true on successful execution, false on error
+     * @return bool   Returns true on successful execution, false on error
      */
     public function execute()
     {

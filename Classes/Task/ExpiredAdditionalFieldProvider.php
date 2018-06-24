@@ -16,7 +16,6 @@ namespace MichielRoos\Tablecleaner\Task;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
@@ -25,11 +24,9 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class ExpiredAdditionalFieldProvider
- * @package MichielRoos\Tablecleaner\Task
  */
 class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
 {
-
     /**
      * Render additional information fields within the scheduler backend.
      *
@@ -74,12 +71,12 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
             $fieldOptions .
             '</select>';
 
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldHtml,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.tables',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // day limit
         if (empty($taskInfo['expiredDayLimit'])) {
@@ -95,12 +92,12 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_dayLimit';
         $fieldCode = '<input type="text" name="tx_scheduler[expiredDayLimit]" id="' .
             $fieldId . '" value="' . htmlspecialchars($taskInfo['expiredDayLimit']) . '"/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.dayLimit',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // limit
         if (empty($taskInfo['limit'])) {
@@ -114,12 +111,12 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_limit';
         $fieldCode = '<input type="text" name="tx_scheduler[limit]" id="' .
             $fieldId . '" value="' . htmlspecialchars($taskInfo['limit']) . '"/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.limit',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // 'Optimize table' option
         if ($taskInfo['optimizeOption'] !== 'checked') {
@@ -132,12 +129,12 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_optimizeOption';
         $fieldCode = '<input type="checkbox" name="tx_scheduler[optimizeOption]" id="' .
             $fieldId . '" value="checked" ' . $taskInfo['optimizeOption'] . '/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.optimizeOption',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         return $additionalFields;
     }
@@ -193,7 +190,7 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
         if ($resource instanceof \mysqli_result) {
             while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
                 $tables[] = $result['TABLE_NAME'];
-            };
+            }
         }
 
         return $tables;
@@ -208,7 +205,7 @@ class ExpiredAdditionalFieldProvider implements AdditionalFieldProviderInterface
      * @param SchedulerModuleController $schedulerModule :
      *    reference to the calling object (BE module of the Scheduler)
      *
-     * @return   boolean      True if validation was ok (or selected class is
+     * @return   bool      True if validation was ok (or selected class is
      *    not relevant), FALSE otherwise
      */
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
