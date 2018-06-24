@@ -19,15 +19,13 @@ namespace MichielRoos\Tablecleaner\Task;
 
 /**
  * Class Deleted
- * @package MichielRoos\Tablecleaner\Task
  */
 class Deleted extends Base
 {
-
     /**
      * Function executed from the Scheduler.
      *
-     * @return boolean
+     * @return bool
      */
     public function execute()
     {
@@ -50,6 +48,7 @@ class Deleted extends Base
                 $successfullyExecuted = false;
             }
         }
+
         return $successfullyExecuted;
     }
 
@@ -64,6 +63,7 @@ class Deleted extends Base
         $string = $GLOBALS['LANG']->sL(
             'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.additionalInformation'
         );
+
         return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

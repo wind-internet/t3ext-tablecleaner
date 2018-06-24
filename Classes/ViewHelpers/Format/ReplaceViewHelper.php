@@ -16,7 +16,6 @@ namespace MichielRoos\Tablecleaner\ViewHelpers\Format;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -44,7 +43,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class ReplaceViewHelper extends AbstractViewHelper
 {
-
     /**
      * Do a simple search and replace on a string
      *
@@ -56,6 +54,7 @@ class ReplaceViewHelper extends AbstractViewHelper
     public function render($search = '', $replace = '')
     {
         $subject = $this->renderChildren();
+
         return str_replace($search, $replace, $subject);
     }
 }

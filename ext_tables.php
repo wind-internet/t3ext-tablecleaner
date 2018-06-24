@@ -10,9 +10,9 @@ if (TYPO3_MODE === 'BE') {
                 'type' => 'check',
                 'default' => 0,
                 'items' => [
-                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1]
-                ]
-            ]
+                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1],
+                ],
+            ],
         ],
         'tx_tablecleaner_exclude_branch' => [
             'exclude' => true,
@@ -21,10 +21,10 @@ if (TYPO3_MODE === 'BE') {
                 'type' => 'check',
                 'default' => 0,
                 'items' => [
-                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1]
-                ]
-            ]
-        ]
+                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1],
+                ],
+            ],
+        ],
     ]);
 
     if (isset($GLOBALS['TCA']['pages']['palettes']['visibility'])) {
@@ -60,7 +60,7 @@ if (TYPO3_MODE === 'BE') {
         // An array holding the controller-action-combinations that are accessible
         // The first controller and its first action will be the default
         [
-            'InfoModule' => 'index'
+            'InfoModule' => 'index',
         ],
         [
             'access' => 'user,group',

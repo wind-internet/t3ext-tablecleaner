@@ -16,24 +16,21 @@ namespace MichielRoos\Tablecleaner\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Class PageRepository
- * @package MichielRoos\Tablecleaner\Domain\Repository
  */
 class PageRepository extends Repository
 {
-
     /**
      * @var array
      */
-    protected $defaultOrderings = array(
-        'sorting' => QueryInterface::ORDER_ASCENDING
-    );
+    protected $defaultOrderings = [
+        'sorting' => QueryInterface::ORDER_ASCENDING,
+    ];
 
     /**
      * Initialize repository
@@ -53,8 +50,8 @@ class PageRepository extends Repository
      *
      * @param array $ids
      *
-     * @return array
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @return array
      */
     public function findByUids($ids)
     {
