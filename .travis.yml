@@ -68,27 +68,27 @@ script:
 jobs:
   fast_finish: true
   include:
-    - stage: test
-      php: 7.2
-      env: TYPO3=dev-master
-    - stage: test
-      php: 7.2
-      env: TYPO3=^9.0
-    - stage: test
-      php: 7.1
-      env: TYPO3=^8.7
-    - stage: test
-      php: 7.0
-      env: TYPO3=^8.7
+#    - stage: test
+#      php: 7.2
+#      env: TYPO3=dev-master
+#    - stage: test
+#      php: 7.2
+#      env: TYPO3=^9.0
+#    - stage: test
+#      php: 7.1
+#      env: TYPO3=^8.7
+#    - stage: test
+#      php: 7.0
+#      env: TYPO3=^8.7
     - stage: test
       php: 5.6
       env: TYPO3=^7.6
     - stage: test
       php: 5.6
       env: TYPO3=^6.2
-    - stage: test
-      php: 5.5
-      env: TYPO3=^7.6
+#    - stage: test
+#      php: 5.5
+#      env: TYPO3=^7.6
 
 #    - stage: 🚢 to ter
 #      if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
