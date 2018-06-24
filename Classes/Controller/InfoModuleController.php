@@ -16,7 +16,6 @@ namespace MichielRoos\Tablecleaner\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use MichielRoos\Tablecleaner\Domain\Model\Page;
 use MichielRoos\Tablecleaner\Domain\Repository\PageRepository;
 use MichielRoos\Tablecleaner\Utility\Base;
@@ -28,11 +27,9 @@ use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
 /**
  * Class InfoModuleController
- * @package MichielRoos\Tablecleaner
  */
 class InfoModuleController extends ActionController
 {
-
     /**
      * @var PageRepository
      */
@@ -99,7 +96,7 @@ class InfoModuleController extends ActionController
     /**
      * Get tree data
      *
-     * @param integer $uid
+     * @param int $uid
      * @param string $subLevelId
      * @return array
      */
@@ -200,7 +197,7 @@ class InfoModuleController extends ActionController
      * Assemble tree
      *
      * @param array $records
-     * @param integer $parentId
+     * @param int $parentId
      * @param string $subLevelId
      *
      * @return array
@@ -221,6 +218,7 @@ class InfoModuleController extends ActionController
                 unset($records[$record['uid']]);
             }
         }
+
         return $branches;
     }
 }

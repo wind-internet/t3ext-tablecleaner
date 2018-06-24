@@ -19,15 +19,13 @@ namespace MichielRoos\Tablecleaner\Task;
 
 /**
  * Class Hidden
- * @package MichielRoos\Tablecleaner\Task
  */
 class Hidden extends Base
 {
-
     /**
      * Function executed from the Scheduler.
      *
-     * @return boolean
+     * @return bool
      */
     public function execute()
     {
@@ -59,6 +57,7 @@ class Hidden extends Base
                 $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
             }
         }
+
         return $successfullyExecuted;
     }
 
@@ -73,6 +72,7 @@ class Hidden extends Base
         $string = $GLOBALS['LANG']->sL(
             'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.additionalInformation'
         );
+
         return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

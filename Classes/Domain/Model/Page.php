@@ -27,17 +27,16 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Class Page
- * @package MichielRoos\Tablecleaner\Domain\Model
  */
 class Page extends AbstractEntity
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $exclude;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $excludeBranch;
 
@@ -47,7 +46,7 @@ class Page extends AbstractEntity
     protected $title;
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getExclude()
     {
@@ -55,7 +54,7 @@ class Page extends AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getExcludeBranch()
     {
@@ -81,7 +80,7 @@ class Page extends AbstractEntity
             'pid' => $this->getPid(),
             'title' => $this->getTitle(),
             'tx_tablecleaner_exclude' => $this->getExclude(),
-            'tx_tablecleaner_exclude_branch' => $this->getExcludeBranch()
+            'tx_tablecleaner_exclude_branch' => $this->getExcludeBranch(),
         ];
     }
 }

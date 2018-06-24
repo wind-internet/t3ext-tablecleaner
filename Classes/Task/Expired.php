@@ -19,15 +19,13 @@ namespace MichielRoos\Tablecleaner\Task;
 
 /**
  * Class Expired
- * @package MichielRoos\Tablecleaner\Task
  */
 class Expired extends Base
 {
-
     /**
      * Function executed from the Scheduler.
      *
-     * @return boolean
+     * @return bool
      */
     public function execute()
     {
@@ -49,6 +47,7 @@ class Expired extends Base
                 $successfullyExecuted = false;
             }
         }
+
         return $successfullyExecuted;
     }
 
@@ -63,6 +62,7 @@ class Expired extends Base
         $string = $GLOBALS['LANG']->sL(
             'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.additionalInformation'
         );
+
         return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

@@ -16,20 +16,17 @@ namespace MichielRoos\Tablecleaner\Task;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class HiddenAdditionalFieldProvider
- * @package MichielRoos\Tablecleaner\Task
  */
 class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
 {
-
     /**
      * Render additional information fields within the scheduler backend.
      *
@@ -75,12 +72,12 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
             $fieldOptions .
             '</select>';
 
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldHtml,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.tables',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // day limit
         if (empty($taskInfo['dayLimit'])) {
@@ -94,12 +91,12 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_dayLimit';
         $fieldCode = '<input type="text" name="tx_scheduler[dayLimit]" id="' .
             $fieldId . '" value="' . htmlspecialchars($taskInfo['dayLimit']) . '"/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.dayLimit',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // Don't delete, but mark as deleted
         if (empty($taskInfo['markAsDeleted'])) {
@@ -113,12 +110,12 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_markAsDeleted';
         $fieldCode = '<input type="checkbox" name="tx_scheduler[markAsDeleted]" id="' .
             $fieldId . '" value="1" ' . (intval($taskInfo['markAsDeleted']) ? ' checked="checked"' : '') . '/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.markAsDeleted',
             'cshKey' => 'tablecleaner',
             'cshLabel' => 'task_markAsDeleted',
-        );
+        ];
 
         // limit
         if (empty($taskInfo['limit'])) {
@@ -132,12 +129,12 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_limit';
         $fieldCode = '<input type="text" name="tx_scheduler[limit]" id="' .
             $fieldId . '" value="' . htmlspecialchars($taskInfo['limit']) . '"/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.limit',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // 'Optimize table' option
         if ($taskInfo['optimizeOption'] !== 'checked') {
@@ -150,12 +147,12 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $fieldId = 'task_optimizeOption';
         $fieldCode = '<input type="checkbox" name="tx_scheduler[optimizeOption]" id="' .
             $fieldId . '" value="checked" ' . $taskInfo['optimizeOption'] . '/>';
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.optimizeOption',
             'cshKey' => 'tablecleaner',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         return $additionalFields;
     }
@@ -194,7 +191,7 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
      * @param   array $submittedData : reference to the array containing the data submitted by the user
      * @param SchedulerModuleController $schedulerModule : reference to the calling object (BE module of the Scheduler)
      *
-     * @return   boolean      True if validation was ok (or selected class is not relevant), FALSE otherwise
+     * @return   bool      True if validation was ok (or selected class is not relevant), FALSE otherwise
      */
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
     {
