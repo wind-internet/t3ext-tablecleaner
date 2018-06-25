@@ -217,8 +217,10 @@ class Base extends AbstractTask
             $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
             $error = $GLOBALS['TYPO3_DB']->sql_error();
         }
+
         return $error;
     }
+
     /**
      * This is the main method that is called when a task is executed
      * It MUST be implemented by all classes inheriting from this one
