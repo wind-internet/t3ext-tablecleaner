@@ -1,5 +1,4 @@
 <?php
-
 namespace MichielRoos\Tablecleaner\Task;
 
 /**
@@ -17,11 +16,7 @@ namespace MichielRoos\Tablecleaner\Task;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class ExpiredAdditionalFieldProvider
@@ -32,7 +27,7 @@ class ExpiredAdditionalFieldProvider extends BaseAdditionalFieldProvider
      * Language labels
      * @var array
      */
-    protected  $labels = [
+    protected $labels = [
         'tables' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.tables',
         'dayLimit' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.dayLimit',
         'deleted' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.limit',

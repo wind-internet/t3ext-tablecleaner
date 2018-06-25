@@ -22,7 +22,6 @@ namespace MichielRoos\Tablecleaner\Task;
  */
 class Expired extends Base
 {
-
     /**
      * Language labels
      * @var array

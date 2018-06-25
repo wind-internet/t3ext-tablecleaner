@@ -1,5 +1,4 @@
 <?php
-
 namespace MichielRoos\Tablecleaner\Task;
 
 /**
@@ -68,8 +67,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         array &$taskInfo,
         $task,
         SchedulerModuleController $schedulerModule
-    )
-    {
+    ) {
         $additionalFields = [];
 
         // tables
@@ -110,8 +108,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         array &$taskInfo,
         $task,
         SchedulerModuleController $schedulerModule
-    )
-    {
+    ) {
         if (empty($taskInfo['dayLimit'])) {
             if ($schedulerModule->CMD == 'add') {
                 $taskInfo['dayLimit'] = '31';
@@ -121,6 +118,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         }
 
         $fieldCode = '<input type="text" name="tx_scheduler[dayLimit]" id="' . $this->contextSensitiveHelpIds['dayLimit'] . '" value="' . htmlspecialchars($taskInfo['dayLimit']) . '"/>';
+
         return [
             'code' => $fieldCode,
             'label' => $this->labels['dayLimit'],
@@ -141,8 +139,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         array &$taskInfo,
         $task,
         SchedulerModuleController $schedulerModule
-    )
-    {
+    ) {
         if (empty($taskInfo['limit'])) {
             if ($schedulerModule->CMD == 'add') {
                 $taskInfo['limit'] = '10000';
@@ -152,6 +149,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         }
 
         $fieldCode = '<input type="text" name="tx_scheduler[limit]" id="' . $this->contextSensitiveHelpIds['dayLimit'] . '" value="' . htmlspecialchars($taskInfo['limit']) . '"/>';
+
         return [
             'code' => $fieldCode,
             'label' => $this->labels['deleted'],
@@ -172,8 +170,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         array &$taskInfo,
         $task,
         SchedulerModuleController $schedulerModule
-    )
-    {
+    ) {
         if ($taskInfo['optimize'] !== 'checked') {
             $taskInfo['optimize'] = '';
             if ($schedulerModule->CMD === 'edit' && $task->getOptimizeOption()) {
@@ -182,6 +179,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         }
 
         $fieldCode = '<input type="checkbox" name="tx_scheduler[optimize]" id="' . $this->contextSensitiveHelpIds['dayLimit'] . '" value="checked" ' . (int)$taskInfo['optimize'] . '/>';
+
         return [
             'code' => $fieldCode,
             'label' => $this->labels['optimize'],
@@ -202,8 +200,7 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         array &$taskInfo,
         $task,
         SchedulerModuleController $schedulerModule
-    )
-    {
+    ) {
         $fieldName = 'tx_scheduler[tables][]';
         $fieldOptions = $this->getTableOptions($taskInfo['tables']);
         $fieldHtml =
