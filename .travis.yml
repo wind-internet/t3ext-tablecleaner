@@ -23,47 +23,37 @@ sudo: required
 before_install:
   - if php -i | grep -q xdebug; then phpenv config-rm xdebug.ini; fi
 
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
+
+before_install:
+- phpenv config-rm xdebug.ini
+
 install:
-  - >
-    if [[ "$TYPO3" = *"dev"* ]]; then
-      composer config minimum-stability dev;
-      composer config prefer-stable true;
-      composer require typo3/cms="@dev" --no-update;
-    fi
-  - composer require nimut/typo3-complete:$TYPO3
-  - mkdir -p .Build/public/typo3conf/ext/
-  - if [ ! -L .Build/public/typo3conf/ext/tablecleaner ]; then ln -snvf ../../../../. .Build/public/typo3conf/ext/tablecleaner; fi
-  - export TYPO3_PATH_ROOT=$PWD/.Build/public
-  - export typo3DatabaseName=typo3
-  - export typo3DatabaseHost=localhost
-  - export typo3DatabaseUsername=root
-  - export typo3DatabasePassword=
+- composer install
 
 script:
-  - >
-    if [ -d "Tests/Unit" ]; then
-      echo;
-      echo "Running unit tests";
-      echo;
-      echo;
-      .Build/bin/phpunit --bootstrap .Build/vendor/nimut/testing-framework/res/Configuration/UnitTestsBootstrap.php Tests/Unit/;
-    fi
+- >
+  echo;
+  echo "Validating the composer.json";
+  composer validate --no-check-all --no-check-lock --strict;
 
-  - >
-    if [ -d "Tests/Functional" ]; then
-      echo;
-      echo "Running functional tests";
-      echo;
-      echo;
-      find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --bootstrap .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTestsBootstrap.php {}';
-    fi
+- >
+  echo;
+  echo "Linting all PHP files";
+  composer ci:php:lint;
 
-  - >
-    echo;
-    echo "Running php lint";
-    echo;
-    echo;
-    find . -name \*.php ! -path "./.Build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;;
+- >
+  echo;
+  echo "Running the unit tests";
+  composer ci:tests:unit;
+
+- >
+  echo;
+  echo "Running the integration tests";
+  composer ci:tests:integration;
 
 jobs:
   fast_finish: true
@@ -86,9 +76,9 @@ jobs:
     - stage: test
       php: 5.6
       env: TYPO3=^6.2
-#    - stage: test
-#      php: 5.5
-#      env: TYPO3=^7.6
+    - stage: test
+      php: 5.5
+      env: TYPO3=^7.6
 
 #    - stage: 🚢 to ter
 #      if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
