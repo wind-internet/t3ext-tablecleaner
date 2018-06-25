@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
- *
  */
 class BaseTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
