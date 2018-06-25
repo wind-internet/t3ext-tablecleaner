@@ -10,9 +10,6 @@
     "health",
     "performance"
   ],
-  "require": {
-    "typo3/cms": "^6.2"
-  },
   "require-dev": {
     "phpunit/phpunit": "^5.7",
     "mikey179/vfsStream": "^1.6.0"

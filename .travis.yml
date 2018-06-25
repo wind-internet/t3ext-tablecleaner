@@ -12,6 +12,7 @@ addons:
 
 cache:
   directories:
+    - vendor
     - $HOME/.composer/cache
     - $HOME/.sonar/cache
 
