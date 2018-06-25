@@ -10,6 +10,12 @@
     "health",
     "performance"
   ],
+  "support": {
+    "issues": "https://github.com/Tuurlijk/t3ext-tablecleaner/issues"
+  },
+  "require": {
+    "typo3/cms-core": "^6.2"
+  },
   "require-dev": {
     "phpunit/phpunit": "^5.7",
     "mikey179/vfsStream": "^1.6.0"
