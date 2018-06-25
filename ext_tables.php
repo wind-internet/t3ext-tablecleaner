@@ -5,7 +5,7 @@ if (TYPO3_MODE === 'BE') {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', [
         'tx_tablecleaner_exclude' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang_db.xml:pages.tx_tablecleaner_exclude',
+            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang_db.xlf:pages.tx_tablecleaner_exclude',
             'config' => [
                 'type' => 'check',
                 'default' => 0,
@@ -16,7 +16,7 @@ if (TYPO3_MODE === 'BE') {
         ],
         'tx_tablecleaner_exclude_branch' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang_db.xml:pages.tx_tablecleaner_exclude_branch',
+            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang_db.xlf:pages.tx_tablecleaner_exclude_branch',
             'config' => [
                 'type' => 'check',
                 'default' => 0,
@@ -41,9 +41,9 @@ if (TYPO3_MODE === 'BE') {
     }
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tablecleaner',
-        'EXT:tablecleaner/Resources/Private/Language/ContextSensitiveHelp.xml');
+        'EXT:tablecleaner/Resources/Private/Language/ContextSensitiveHelp.xlf');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('pages',
-        'EXT:tablecleaner/Resources/Private/Language/ContextSensitiveHelpPages.xml');
+        'EXT:tablecleaner/Resources/Private/Language/ContextSensitiveHelpPages.xlf');
 
     /**
      * Register the Backend Module
