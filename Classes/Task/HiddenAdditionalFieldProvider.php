@@ -1,4 +1,5 @@
 <?php
+
 namespace MichielRoos\Tablecleaner\Task;
 
 /**
@@ -25,7 +26,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /**
  * Class HiddenAdditionalFieldProvider
  */
-class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
+class HiddenAdditionalFieldProvider extends BaseAdditionalFieldProvider
 {
     /**
      * Render additional information fields within the scheduler backend.
@@ -47,56 +48,25 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
         $tables = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithHiddenAndTstamp();
 
         // tables
-        if (empty($taskInfo['hiddenTables'])) {
-            $taskInfo['hiddenTables'] = [];
+        if (empty($taskInfo['tables'])) {
+            $taskInfo['tables'] = [];
             if ($schedulerModule->CMD === 'add') {
                 // In case of new task, set some defaults
                 if (in_array('sys_log', $tables)) {
-                    $taskInfo['hiddenTables'][] = 'sys_log';
+                    $taskInfo['tables'][] = 'sys_log';
                 }
                 if (in_array('sys_history', $tables)) {
-                    $taskInfo['hiddenTables'][] = 'sys_history';
+                    $taskInfo['tables'][] = 'sys_history';
                 }
                 $taskInfo['markAsDeleted'] = 1;
             } elseif ($schedulerModule->CMD === 'edit') {
                 // In case of editing the task, set to currently selected value
-                $taskInfo['hiddenTables'] = $task->getTables();
+                $taskInfo['tables'] = $task->getTables();
             }
         }
 
-        $fieldName = 'tx_scheduler[hiddenTables][]';
-        $fieldId = 'task_hiddenTables';
-        $fieldOptions = $this->getTableOptions($tables, $taskInfo['hiddenTables']);
-        $fieldHtml =
-            '<select name="' . $fieldName . '" id="' . $fieldId . '" class="wide" size="10" multiple="multiple">' .
-            $fieldOptions .
-            '</select>';
-
-        $additionalFields[$fieldId] = [
-            'code' => $fieldHtml,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.tables',
-            'cshKey' => 'tablecleaner',
-            'cshLabel' => $fieldId,
-        ];
-
-        // day limit
-        if (empty($taskInfo['dayLimit'])) {
-            if ($schedulerModule->CMD === 'add') {
-                $taskInfo['dayLimit'] = '31';
-            } else {
-                $taskInfo['dayLimit'] = $task->getDayLimit();
-            }
-        }
-
-        $fieldId = 'task_dayLimit';
-        $fieldCode = '<input type="text" name="tx_scheduler[dayLimit]" id="' .
-            $fieldId . '" value="' . htmlspecialchars($taskInfo['dayLimit']) . '"/>';
-        $additionalFields[$fieldId] = [
-            'code' => $fieldCode,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.dayLimit',
-            'cshKey' => 'tablecleaner',
-            'cshLabel' => $fieldId,
-        ];
+        $additionalFields['tables'] = $this->getTablesField($taskInfo, $task, $schedulerModule);
+        $additionalFields['dayLimit'] = $this->getDayLimitField($taskInfo, $task, $schedulerModule);
 
         // Don't delete, but mark as deleted
         if (empty($taskInfo['markAsDeleted'])) {
@@ -109,156 +79,17 @@ class HiddenAdditionalFieldProvider implements AdditionalFieldProviderInterface
 
         $fieldId = 'task_markAsDeleted';
         $fieldCode = '<input type="checkbox" name="tx_scheduler[markAsDeleted]" id="' .
-            $fieldId . '" value="1" ' . (intval($taskInfo['markAsDeleted']) ? ' checked="checked"' : '') . '/>';
+            $fieldId . '" value="1" ' . ((int)$taskInfo['markAsDeleted'] ? ' checked="checked"' : '') . '/>';
         $additionalFields[$fieldId] = [
             'code' => $fieldCode,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.markAsDeleted',
+            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.markAsDeleted',
             'cshKey' => 'tablecleaner',
             'cshLabel' => 'task_markAsDeleted',
         ];
 
-        // limit
-        if (empty($taskInfo['limit'])) {
-            if ($schedulerModule->CMD == 'add') {
-                $taskInfo['limit'] = '10000';
-            } else {
-                $taskInfo['limit'] = $task->getLimit();
-            }
-        }
-
-        $fieldId = 'task_limit';
-        $fieldCode = '<input type="text" name="tx_scheduler[limit]" id="' .
-            $fieldId . '" value="' . htmlspecialchars($taskInfo['limit']) . '"/>';
-        $additionalFields[$fieldId] = [
-            'code' => $fieldCode,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.limit',
-            'cshKey' => 'tablecleaner',
-            'cshLabel' => $fieldId,
-        ];
-
-        // 'Optimize table' option
-        if ($taskInfo['optimizeOption'] !== 'checked') {
-            $taskInfo['optimizeOption'] = '';
-            if ($schedulerModule->CMD === 'edit' && $task->getOptimizeOption()) {
-                $taskInfo['optimizeOption'] = 'checked';
-            }
-        }
-
-        $fieldId = 'task_optimizeOption';
-        $fieldCode = '<input type="checkbox" name="tx_scheduler[optimizeOption]" id="' .
-            $fieldId . '" value="checked" ' . $taskInfo['optimizeOption'] . '/>';
-        $additionalFields[$fieldId] = [
-            'code' => $fieldCode,
-            'label' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.optimizeOption',
-            'cshKey' => 'tablecleaner',
-            'cshLabel' => $fieldId,
-        ];
+        $additionalFields['limit'] = $this->getLimitField($taskInfo, $task, $schedulerModule);
+        $additionalFields['optimize'] = $this->getOptimizeField($taskInfo, $task, $schedulerModule);
 
         return $additionalFields;
-    }
-
-    /**
-     * Build select options of available tables and set currently selected tables
-     *
-     * @param array $tables Available tables
-     * @param array $selectedTables Selected tables
-     *
-     * @return string HTML of selectbox options
-     */
-    protected function getTableOptions(array $tables, array $selectedTables)
-    {
-        $options = [];
-
-        foreach ($tables as $tableName) {
-            if (in_array($tableName, $selectedTables)) {
-                $selected = ' selected="selected"';
-            } else {
-                $selected = '';
-            }
-            $options[] =
-                '<option value="' . $tableName . '"' . $selected . '>' .
-                $tableName .
-                '</option>';
-        }
-
-        return implode('', $options);
-    }
-
-    /**
-     * This method checks any additional data that is relevant to the specific task.
-     * If the task class is not relevant, the method is expected to return TRUE.
-     *
-     * @param   array $submittedData : reference to the array containing the data submitted by the user
-     * @param SchedulerModuleController $schedulerModule : reference to the calling object (BE module of the Scheduler)
-     *
-     * @return   bool      True if validation was ok (or selected class is not relevant), FALSE otherwise
-     */
-    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
-    {
-        $isValid = true;
-
-        if (is_array($submittedData['hiddenTables'])) {
-            $tables = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithHiddenAndTstamp();
-            foreach ($submittedData['hiddenTables'] as $table) {
-                if (!in_array($table, $tables)) {
-                    $isValid = false;
-                    $schedulerModule->addMessage(
-                        $GLOBALS['LANG']->sL(
-                            'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidTables'
-                        ),
-                        FlashMessage::ERROR
-                    );
-                }
-            }
-        } else {
-            $isValid = false;
-            $schedulerModule->addMessage(
-                $GLOBALS['LANG']->sL('LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.noTables'),
-                FlashMessage::ERROR
-            );
-        }
-
-        if ($submittedData['dayLimit'] <= 0) {
-            $isValid = false;
-            $schedulerModule->addMessage(
-                $GLOBALS['LANG']->sL(
-                    'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidNumberOfDays'
-                ),
-                FlashMessage::ERROR
-            );
-        }
-
-        if (!MathUtility::canBeInterpretedAsInteger($submittedData['limit'])) {
-            $isValid = false;
-            $schedulerModule->addMessage(
-                $GLOBALS['LANG']->sL(
-                    'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.general.invalidLimit'
-                ),
-                FlashMessage::ERROR
-            );
-        }
-
-        $submittedData['markAsDeleted'] = intval($submittedData['markAsDeleted']);
-
-        return $isValid;
-    }
-
-    /**
-     * This method is used to save any additional input into the current task object
-     * if the task class matches.
-     *
-     * @param   array $submittedData : array containing the data submitted by the user
-     * @param   AbstractTask $task : reference to the current task object
-     *
-     * @return   void
-     */
-    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
-    {
-        /** @var $task Base */
-        $task->setDayLimit((int)$submittedData['dayLimit']);
-        $task->setLimit((int)$submittedData['limit']);
-        $task->setMarkAsDeleted($submittedData['markAsDeleted']);
-        $task->setOptimizeOption($submittedData['optimizeOption'] === 'checked');
-        $task->setTables($submittedData['hiddenTables']);
     }
 }

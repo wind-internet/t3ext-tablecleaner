@@ -46,7 +46,7 @@
             <trans-unit id="tasks.deleted.dayLimit">
                 <source>Remove deleted entries older than given number of days</source>
             </trans-unit>
-            <trans-unit id="tasks.deleted.limit">
+            <trans-unit id="tasks.limit">
                 <source>Maximum amount of rows to handle per run</source>
             </trans-unit>
             <trans-unit id="tasks.deleted.additionalInformation">
@@ -70,10 +70,10 @@
             <trans-unit id="tasks.general.additionalInformationExcludeRecursive">
                 <source>recursively</source>
             </trans-unit>
-            <trans-unit id="tasks.general.tables">
+            <trans-unit id="tasks.tables">
                 <source>Tables</source>
             </trans-unit>
-            <trans-unit id="tasks.general.markAsDeleted">
+            <trans-unit id="tasks.hidden.markAsDeleted">
                 <source>Mark records as 'deleted' instead of removing them from the table</source>
             </trans-unit>
             <trans-unit id="tasks.general.noTables">
@@ -88,7 +88,7 @@
             <trans-unit id="tasks.general.invalidNumberOfDays">
                 <source>Please enter a valid number of days</source>
             </trans-unit>
-            <trans-unit id="tasks.general.optimizeOption">
+            <trans-unit id="tasks.optimize">
                 <source>Perform 'OPTIMIZE TABLE' after clean up&lt;br/&gt;(WARNING: database may be unavailable
                     shortly!)
                 </source>

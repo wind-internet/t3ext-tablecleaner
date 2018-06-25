@@ -66,6 +66,14 @@ class Base extends AbstractTask
     protected $markAsDeleted;
 
     /**
+     * Language labels
+     * @var array
+     */
+    protected $labels = [
+        'additionalInformation' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.additionalInformation',
+    ];
+
+    /**
      * Get the value of the protected property tables.
      *
      * @return array of tables
@@ -197,6 +205,21 @@ class Base extends AbstractTask
     }
 
     /**
+     * Optimize table
+     *
+     * @param $table
+     * @return string
+     */
+    public function optimizeTable($table)
+    {
+        $error = $GLOBALS['TYPO3_DB']->sql_error();
+        if (!$error && $this->optimizeOption) {
+            $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
+            $error = $GLOBALS['TYPO3_DB']->sql_error();
+        }
+        return $error;
+    }
+    /**
      * This is the main method that is called when a task is executed
      * It MUST be implemented by all classes inheriting from this one
      * Note that there is no error handling, errors and failures are expected
@@ -207,6 +230,21 @@ class Base extends AbstractTask
      */
     public function execute()
     {
-        // TODO: Implement execute() method.
+        return true;
+    }
+
+    /**
+     * Returns some additional information about the task in scheduler overview.
+     *
+     * @return string Information to display
+     */
+    public function getAdditionalInformation()
+    {
+        return sprintf(
+            $GLOBALS['LANG']->sL($this->labels['additionalInformation']),
+            (int)$this->dayLimit,
+            implode(', ', $this->tables),
+            (int)$this->limit
+        );
     }
 }

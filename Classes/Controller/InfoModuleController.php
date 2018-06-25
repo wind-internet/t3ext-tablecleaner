@@ -1,4 +1,5 @@
 <?php
+
 namespace MichielRoos\Tablecleaner\Controller;
 
 /**
@@ -104,10 +105,10 @@ class InfoModuleController extends ActionController
     {
         // Filter the results by preference and access
         $clauseExludePidList = '';
-        if ($pidList = $GLOBALS['BE_USER']->getTSConfigVal('options.hideRecords.pages')) {
-            if ($pidList = $GLOBALS['TYPO3_DB']->cleanIntList($pidList)) {
-                $clauseExludePidList = ' AND pages.uid NOT IN (' . $pidList . ')';
-            }
+        $pidList = $GLOBALS['BE_USER']->getTSConfigVal('options.hideRecords.pages');
+        $pidList = $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
+        if ($pidList) {
+            $clauseExludePidList = ' AND pages.uid NOT IN (' . $pidList . ')';
         }
         $clause = ' AND ' . $GLOBALS['BE_USER']->getPagePermsClause(1) . ' ' . $clauseExludePidList;
 

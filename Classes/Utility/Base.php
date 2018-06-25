@@ -49,7 +49,7 @@ class Base
         );
 
         if ($resource instanceof \mysqli_result) {
-            while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
+            while ($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource)) {
                 $tables[] = $result['TABLE_NAME'];
             }
         }
@@ -79,7 +79,7 @@ class Base
 			AND TABLE_SCHEMA =  '" . TYPO3_db . "'"
         );
         if ($resource instanceof \mysqli_result) {
-            while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
+            while ($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource)) {
                 $tables[] = $result['TABLE_NAME'];
             }
         }
@@ -103,7 +103,7 @@ class Base
 			AND TABLE_SCHEMA =  '" . TYPO3_db . "'"
         );
         if ($resource instanceof \mysqli_result) {
-            while (($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource))) {
+            while ($result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resource)) {
                 $tables[] = $result['TABLE_NAME'];
             }
         }
@@ -126,7 +126,7 @@ class Base
         }
         $res = $GLOBALS['TYPO3_DB']->sql_query('SELECT uid FROM pages WHERE pid = ' . $pageId);
         $pageIds[] = $pageId;
-        while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+        while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
             $pageIds[] = $row['uid'];
             $pageIds = array_merge($pageIds, self::fetchChildPages($row['uid']));
         }
@@ -155,7 +155,7 @@ class Base
 			WHERE
 				tx_tablecleaner_exclude = 1;
 			');
-        while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+        while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
             $pageIds[] = $row['uid'];
         }
         $GLOBALS['TYPO3_DB']->sql_free_result($res);
@@ -170,13 +170,11 @@ class Base
 			WHERE
 				tx_tablecleaner_exclude_branch = 1;
 			');
-        while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+        while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
             $pageIds = array_merge($pageIds, self::fetchChildPages($row['uid']));
         }
         $GLOBALS['TYPO3_DB']->sql_free_result($res);
 
-        $pageIds = array_unique($pageIds);
-
-        return $pageIds;
+        return array_unique($pageIds);
     }
 }

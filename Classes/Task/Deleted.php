@@ -1,4 +1,5 @@
 <?php
+
 namespace MichielRoos\Tablecleaner\Task;
 
 /**
@@ -39,31 +40,12 @@ class Deleted extends Base
                 $where,
                 $this->limit
             ));
-            $error = $GLOBALS['TYPO3_DB']->sql_error();
-            if (!$error && $this->optimizeOption) {
-                $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
-                $error = $GLOBALS['TYPO3_DB']->sql_error();
-            }
+            $error = $this->optimizeTable($table);
             if ($error) {
                 $successfullyExecuted = false;
             }
         }
 
         return $successfullyExecuted;
-    }
-
-    /**
-     * Returns some additional information about indexing progress, shown in
-     * the scheduler's task overview list.
-     *
-     * @return string Information to display
-     */
-    public function getAdditionalInformation()
-    {
-        $string = $GLOBALS['LANG']->sL(
-            'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.deleted.additionalInformation'
-        );
-
-        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

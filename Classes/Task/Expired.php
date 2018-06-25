@@ -22,6 +22,15 @@ namespace MichielRoos\Tablecleaner\Task;
  */
 class Expired extends Base
 {
+
+    /**
+     * Language labels
+     * @var array
+     */
+    protected $labels = [
+        'additionalInformation' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.additionalInformation',
+    ];
+
     /**
      * Function executed from the Scheduler.
      *
@@ -38,31 +47,12 @@ class Expired extends Base
                 $this->getWhereClause($table),
                 $this->limit
             ));
-            $error = $GLOBALS['TYPO3_DB']->sql_error();
-            if (!$error && $this->optimizeOption) {
-                $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
-                $error = $GLOBALS['TYPO3_DB']->sql_error();
-            }
+            $error = $this->optimizeTable($table);
             if ($error) {
                 $successfullyExecuted = false;
             }
         }
 
         return $successfullyExecuted;
-    }
-
-    /**
-     * Returns some additional information about indexing progress, shown in
-     * the scheduler's task overview list.
-     *
-     * @return string Information to display
-     */
-    public function getAdditionalInformation()
-    {
-        $string = $GLOBALS['LANG']->sL(
-            'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.expired.additionalInformation'
-        );
-
-        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }

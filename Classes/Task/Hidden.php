@@ -23,6 +23,14 @@ namespace MichielRoos\Tablecleaner\Task;
 class Hidden extends Base
 {
     /**
+     * Language labels
+     * @var array
+     */
+    protected $labels = [
+        'additionalInformation' => 'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.additionalInformation',
+    ];
+
+    /**
      * Function executed from the Scheduler.
      *
      * @return bool
@@ -50,29 +58,12 @@ class Hidden extends Base
                     $this->limit
                 ));
             }
-            $error = $GLOBALS['TYPO3_DB']->sql_error();
+            $error = $this->optimizeTable($table);
             if ($error) {
                 $successfullyExecuted = false;
-            } elseif ($this->optimizeOption) {
-                $GLOBALS['TYPO3_DB']->sql_query('OPTIMIZE TABLE ' . $table);
             }
         }
 
         return $successfullyExecuted;
-    }
-
-    /**
-     * Returns some additional information about indexing progress, shown in
-     * the scheduler's task overview list.
-     *
-     * @return string Information to display
-     */
-    public function getAdditionalInformation()
-    {
-        $string = $GLOBALS['LANG']->sL(
-            'LLL:EXT:tablecleaner/Resources/Private/Language/locallang.xlf:tasks.hidden.additionalInformation'
-        );
-
-        return sprintf($string, (int)$this->dayLimit, implode(', ', $this->tables), (int)$this->limit);
     }
 }
