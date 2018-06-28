@@ -43,9 +43,9 @@ class DeletedAdditionalFieldProviderTest extends \TYPO3\CMS\Core\Tests\UnitTestC
     /**
      * @test
      * @dataProvider getTableOptionsDataProvider
-     * @param mixed $availableTables
-     * @param mixed $selectedTables
-     * @param mixed $expected
+     * @param array $availableTables
+     * @param array $selectedTables
+     * @param string $expected
      */
     public function getTableOptionsReturnsOptionList($availableTables, $selectedTables, $expected)
     {
