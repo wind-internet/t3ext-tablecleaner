@@ -202,7 +202,8 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
         SchedulerModuleController $schedulerModule
     ) {
         $fieldName = 'tx_scheduler[tables][]';
-        $fieldOptions = $this->getTableOptions($taskInfo['tables']);
+        $availableTables = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithDeletedAndTstamp();
+        $fieldOptions = $this->getTableOptions($availableTables, $taskInfo['tables']);
         $fieldHtml =
             '<select name="' . $fieldName . '" id="' . $this->contextSensitiveHelpIds['dayLimit'] . '" class="wide" size="10" multiple="multiple">' .
             $fieldOptions .
@@ -219,15 +220,15 @@ class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
     /**
      * Build select options of available tables and set currently selected tables
      *
+     * @param $availableTables
      * @param array $selectedTables Selected tables
      *
      * @return string HTML of selectbox options
      */
-    protected function getTableOptions(array $selectedTables)
+    protected function getTableOptions($availableTables, array $selectedTables)
     {
         $options = [];
 
-        $availableTables = \MichielRoos\Tablecleaner\Utility\Base::getTablesWithDeletedAndTstamp();
         foreach ($availableTables as $tableName) {
             if (in_array($tableName, $selectedTables)) {
                 $selected = ' selected="selected"';

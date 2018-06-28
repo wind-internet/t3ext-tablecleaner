@@ -47,4 +47,24 @@ class BaseTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         static::assertNull($this->subject->getTables());
     }
+
+    /**
+     * @test
+     */
+    public function setLimitSetsLimit()
+    {
+        $limit = 5;
+
+        $this->subject->setLimit($limit);
+
+        static::assertSame($limit, $this->subject->getLimit());
+    }
+
+    /**
+     * @test
+     */
+    public function getWhereClauseForPagesContainsTimestamp()
+    {
+        static::assertContains('tstamp', $this->subject->getWhereClause('pages'));
+    }
 }
