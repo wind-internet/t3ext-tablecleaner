@@ -14,9 +14,7 @@ namespace MichielRoos\Tablecleaner\Tests\Unit\Task;
  * The TYPO3 project - inspiring people to share!
  */
 
-use MichielRoos\Tablecleaner\Task\Base;
 use MichielRoos\Tablecleaner\Task\DeletedAdditionalFieldProvider;
-use TYPO3\CMS\Core\Tests\AccessibleObjectInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -45,6 +43,9 @@ class DeletedAdditionalFieldProviderTest extends \TYPO3\CMS\Core\Tests\UnitTestC
     /**
      * @test
      * @dataProvider getTableOptionsDataProvider
+     * @param mixed $availableTables
+     * @param mixed $selectedTables
+     * @param mixed $expected
      */
     public function getTableOptionsReturnsOptionList($availableTables, $selectedTables, $expected)
     {
