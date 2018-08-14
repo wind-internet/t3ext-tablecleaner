@@ -60,6 +60,7 @@ class DeletedAdditionalFieldProviderTest extends \TYPO3\CMS\Core\Tests\UnitTestC
             'pages with pages selected' => [['pages'], ['pages'], '<option value="pages" selected="selected">pages</option>'],
             'pages and sys log with pages selected' => [['pages', 'sys_log'], ['pages'], '<option value="pages" selected="selected">pages</option><option value="sys_log">sys_log</option>'],
             'pages and sys log with sys_log selected' => [['pages', 'sys_log'], ['sys_log'], '<option value="pages">pages</option><option value="sys_log" selected="selected">sys_log</option>'],
+            'pages and sys log with nothing selected' => [['pages', 'sys_log'], [], '<option value="pages">pages</option><option value="sys_log">sys_log</option>'],
         ];
     }
 }
