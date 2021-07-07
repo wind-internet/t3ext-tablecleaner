@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2013-11-26T17:55:17Z"
+          product-name="tablecleaner">
+        <header/>
+        <body>
+            <trans-unit id="task_deletedTables.alttitle">
+                <target>Tabellen</target>
+            </trans-unit>
+            <trans-unit id="task_deletedTables.description">
+                <target>Selecteer de tabellen waaruit de verwijderde rijden moeten worden verwijderd.</target>
+            </trans-unit>
+            <trans-unit id="task_deletedDayLimit.alttitle">
+                <target>Retentie tijd</target>
+            </trans-unit>
+            <trans-unit id="task_deletedDayLimit.description">
+                <target>Het aantal dagen waarna de verwijderde rijen uit de tabel worden verwijderd.</target>
+            </trans-unit>
+            <trans-unit id="task_hiddenTables.alttitle">
+                <target>Tabellen</target>
+            </trans-unit>
+            <trans-unit id="task_hiddenTables.description">
+                <target>Selecteer de tabellen waaruit de verborgen rijden moeten worden verwijderd.</target>
+            </trans-unit>
+            <trans-unit id="task_dayLimit.alttitle">
+                <target>Retentie tijd</target>
+            </trans-unit>
+            <trans-unit id="task_dayLimit.description">
+                <target>Het aantal dagen waarna de verborgen rijen uit de tabel worden verwijderd.</target>
+            </trans-unit>
+            <trans-unit id="task_expiredTables.alttitle">
+                <target>Tabellen</target>
+            </trans-unit>
+            <trans-unit id="task_expiredTables.description">
+                <target>Selecteer de tabellen waaruit de rijden moeten worden verwijderd.</target>
+            </trans-unit>
+            <trans-unit id="task_dayLimit.alttitle">
+                <target>Retentie tijd</target>
+            </trans-unit>
+            <trans-unit id="task_dayLimit.description">
+                <target>Het aantal dagen waarna de rijen uit de tabel worden verwijderd.</target>
+            </trans-unit>
+            <trans-unit id="task_markAsDeleted.alttitle">
+                <target>Zet op verwijderd</target>
+            </trans-unit>
+            <trans-unit id="task_markAsDeleted.description">
+                <target>Markeer de rijen als 'verwijderd' in plaats van ze daadwerkelijk uit de tabel te verwijderen. De
+                    timestamp van deze rijen zal worden aangepast. De 'verwijderde rijden' tablecleaner opschoontaak kan
+                    ze vervolgens daadwerkelijk verwijderen.
+                </target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

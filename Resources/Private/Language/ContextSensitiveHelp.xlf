@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2013-11-26T17:55:17Z"
+          product-name="tablecleaner">
+        <header/>
+        <body>
+            <trans-unit id="deletedTables.alttitle">
+                <source>Tables</source>
+            </trans-unit>
+            <trans-unit id="deletedTables.description">
+                <source>Select the tables from which you want to remove the deleted entries.</source>
+            </trans-unit>
+            <trans-unit id="deletedDayLimit.alttitle">
+                <source>Retention time</source>
+            </trans-unit>
+            <trans-unit id="deletedDayLimit.description">
+                <source>Choose the number of days after which the 'deleted' entries should be removed from the chosen
+                    tables.
+                </source>
+            </trans-unit>
+            <trans-unit id="hiddenTables.alttitle">
+                <source>Tables</source>
+            </trans-unit>
+            <trans-unit id="hiddenTables.description">
+                <source>Select the tables from which you want to remove the hidden entries.</source>
+            </trans-unit>
+            <trans-unit id="dayLimit.alttitle">
+                <source>Retention time</source>
+            </trans-unit>
+            <trans-unit id="dayLimit.description">
+                <source>Choose the number of days after which the 'hidden' entries should be removed from the chosen
+                    tables.
+                </source>
+            </trans-unit>
+            <trans-unit id="expiredTables.alttitle">
+                <source>Tables</source>
+            </trans-unit>
+            <trans-unit id="expiredTables.description">
+                <source>Select the tables from which you want to remove the expired entries.</source>
+            </trans-unit>
+            <trans-unit id="dayLimit.alttitle">
+                <source>Retention time</source>
+            </trans-unit>
+            <trans-unit id="dayLimit.description">
+                <source>Choose the number of days after which the entries should be removed from the chosen tables.
+                </source>
+            </trans-unit>
+            <trans-unit id="markAsDeleted.alttitle">
+                <source>Mark as deleted</source>
+            </trans-unit>
+            <trans-unit id="markAsDeleted.description">
+                <source>Instead of removing the records from the table, mark them as deleted. The timestamp of these
+                    records will be updated. The records may later be cleaned up by the 'deleted' tablecleaner task.
+                </source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

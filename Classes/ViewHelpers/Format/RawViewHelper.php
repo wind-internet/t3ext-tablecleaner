@@ -1,14 +1,22 @@
 <?php
+namespace MichielRoos\Tablecleaner\ViewHelpers\Format;
 
-/*                                                                        *
- * This script is backported from the FLOW3 package "TYPO3.Fluid".        *
- *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- *  of the License, or (at your option) any later version.                *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
- *                                                                        */
+/**
+ * ⓒ 2018 Michiel Roos <michiel@michielroos.com>
+ * All rights reserved
+ *
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Outputs an argument/value without any escaping. Is normally used to output
@@ -42,21 +50,19 @@
  *
  * @api
  */
-class Tx_Tablecleaner_ViewHelpers_Format_RawViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class RawViewHelper extends AbstractViewHelper
+{
+    /**
+     * @param mixed $value The value to output
+     *
+     * @return string
+     */
+    public function render($value = null)
+    {
+        if ($value === null) {
+            return $this->renderChildren();
+        }
 
-	/**
-	 * @param mixed $value The value to output
-	 *
-	 * @return string
-	 */
-	public function render($value = NULL) {
-		if ($value === NULL) {
-			return $this->renderChildren();
-		} else {
-			return $value;
-		}
-	}
+        return $value;
+    }
 }
-
-
-?>

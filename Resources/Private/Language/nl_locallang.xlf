@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2013-11-26T17:55:17Z"
+          product-name="tablecleaner">
+        <header/>
+        <body>
+            <trans-unit id="mlang_labels_tabdescr">
+                <target>Overzicht van pagina's die uitgesloten zijn van opschoning.</target>
+            </trans-unit>
+            <trans-unit id="mlang_tabs_tab">
+                <target>Tabel Opschoner</target>
+            </trans-unit>
+            <trans-unit id="module.description">
+                <target>Overzicht van pagina's die uitgesloten zijn van opschoning. Hier vind je een overzicht van de
+                    pagina's en pagina takken die zijn uitgesloten van opschoning. Door te klikken op de pagina titel
+                    kun je de pagina eigenschappen van die pagina bewerken.
+                </target>
+            </trans-unit>
+            <trans-unit id="module.startingPoint">
+                <target>Pagina's vanaf startpunt '%s' (uid: %s)</target>
+            </trans-unit>
+            <trans-unit id="module.subTitle">
+                <target>Overzicht van uitgesloten pagina's</target>
+            </trans-unit>
+            <trans-unit id="module.title">
+                <target>Table Opschoner</target>
+            </trans-unit>
+            <trans-unit id="module.usage">
+                <target>Gebruik</target>
+            </trans-unit>
+            <trans-unit id="module.usage.description">
+                <target>Kies een pagina uit de paginaboom als startpunt.</target>
+            </trans-unit>
+            <trans-unit id="module.usage.exclude">
+                <target>Pagina is uitgesloten van opschoning</target>
+            </trans-unit>
+            <trans-unit id="module.usage.excludeBranch">
+                <target>Pagina inclusief alle onderliggende pagina's uitgesloten van opschoning</target>
+            </trans-unit>
+            <trans-unit id="tasks.deleted.title">
+                <target>Tabel Opschonen: verwijderde rijen</target>
+            </trans-unit>
+            <trans-unit id="tasks.deleted.description">
+                <target>Verwijdert verwijderde rijen ouder dan N dagen van tabellen.</target>
+            </trans-unit>
+            <trans-unit id="tasks.deleted.dayLimit">
+                <target>Verwijder 'verwijderde' rijen ouder dan het opgegeven aantal dagen</target>
+            </trans-unit>
+            <trans-unit id="tasks.deleted.limit">
+                <source>Maximaal aantal te bewerken rijen</source>
+            </trans-unit>
+            <trans-unit id="tasks.deleted.additionalInformation">
+                <target>Verwijder 'verwijderde' rijen ouder dan %s dagen van tabellen: %s in batches van %d</target>
+            </trans-unit>
+            <trans-unit id="tasks.expired.title">
+                <target>Tabel Opschonen: verouderde rijen</target>
+            </trans-unit>
+            <trans-unit id="tasks.expired.description">
+                <target>Verwijdert rijen ouder dan N dagen van tabellen.</target>
+            </trans-unit>
+            <trans-unit id="tasks.expired.dayLimit">
+                <target>Verwijder rijen ouder dan het opgegeven aantal dagen</target>
+            </trans-unit>
+            <trans-unit id="tasks.expired.additionalInformation">
+                <target>Verwijder rijen ouder dan %s dagen van tabellen: %s in batches van %d</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.additionalInformationExclude">
+                <target>behalve van pagina's %s</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.additionalInformationExcludeRecursive">
+                <target>en onderliggende pagina's</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.tables">
+                <target>Tabellen</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.markAsDeleted">
+                <target>Zet de rijen op 'verwijderd' in plaats van ze daadwerkelijk te verwijderen</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.noTables">
+                <target>Selecteer een of meer tabellen om op te schonen</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.invalidTables">
+                <target>Je hebt niet beschikbare tabellen geselecteerd</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.invalidNumberOfDays">
+                <target>Geef een geldig aantal dagen op</target>
+            </trans-unit>
+            <trans-unit id="tasks.general.optimizeOption">
+                <target>Voer 'OPTIMIZE TABLE' uit na opschonen&lt;br/&gt;(Waarschuwing: hierdoor is de database mogelijk
+                    even onbereikbaar!)
+                </target>
+            </trans-unit>
+            <trans-unit id="tasks.hidden.title">
+                <target>Tabel Opschonen: verborgen rijen</target>
+            </trans-unit>
+            <trans-unit id="tasks.hidden.description">
+                <target>Verwijdert verborgen rijen ouder dan N dagen van tabellen.</target>
+            </trans-unit>
+            <trans-unit id="tasks.hidden.dayLimit">
+                <target>Verwijder verborgen rijen ouder dan het opgegeven aantal dagen</target>
+            </trans-unit>
+            <trans-unit id="tasks.hidden.additionalInformation">
+                <target>Verwijder verborgen rijen ouder dan %s dagen van tabellen: %s in batches van %d</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

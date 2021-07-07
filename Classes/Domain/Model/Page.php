@@ -1,4 +1,6 @@
 <?php
+namespace MichielRoos\Tablecleaner\Domain\Model;
+
 /*****************************************************************************
  *  Copyright notice
  *
@@ -21,51 +23,64 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ****************************************************************************/
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
- * A page
- *
- * @author   Michiel Roos <michiel@maxserv.nl>
- * @package TYPO3
- * @subpackage tablecleaner
+ * Class Page
  */
-class Tx_Tablecleaner_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEntity {
+class Page extends AbstractEntity
+{
+    /**
+     * @var bool
+     */
+    protected $exclude;
 
-	/**
-	 * @var boolean
-	 */
-	protected $exclude;
+    /**
+     * @var bool
+     */
+    protected $excludeBranch;
 
-	/**
-	 * @var boolean
-	 */
-	protected $excludeBranch;
+    /**
+     *  * @var string
+     *  */
+    protected $title;
 
-	/**
-	 * @var string
-	 */
-	protected $title;
+    /**
+     * @return bool
+     */
+    public function getExclude()
+    {
+        return $this->exclude;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function getExclude() {
-		return $this->exclude;
-	}
+    /**
+     * @return bool
+     */
+    public function getExcludeBranch()
+    {
+        return $this->excludeBranch;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function getExcludeBranch() {
-		return $this->excludeBranch;
-	}
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-
+    /**
+     * Convert object to array
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'uid' => $this->getUid(),
+            'pid' => $this->getPid(),
+            'title' => $this->getTitle(),
+            'tx_tablecleaner_exclude' => $this->getExclude(),
+            'tx_tablecleaner_exclude_branch' => $this->getExcludeBranch(),
+        ];
+    }
 }
-
-?>

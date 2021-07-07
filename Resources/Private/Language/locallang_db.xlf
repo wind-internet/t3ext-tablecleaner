@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2013-11-26T17:55:17Z"
+          product-name="tablecleaner">
+        <header/>
+        <body>
+            <trans-unit id="pages.tx_tablecleaner_exclude">
+                <source>Exclude page from tablecleaner</source>
+            </trans-unit>
+            <trans-unit id="pages.tx_tablecleaner_exclude_branch">
+                <source>Exclude branch from tablecleaner</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
